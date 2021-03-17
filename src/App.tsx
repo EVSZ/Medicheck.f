@@ -7,7 +7,8 @@ function App() {
   return (
     <div className="App">
       <NavigationBar/>
-      <UserPForm />
+      <UserPForm properties={{gender:"male", height:155, name:"Matt", weight:75}}
+      />
     </div>
   );
 }
