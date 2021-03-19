@@ -8,8 +8,9 @@ function App() {
   return (
     <div className="App">
       <NavigationBar />
-      <PharmaceuticalCatalogue properties={{name: "Gai", type: 5, description: "Really big gai"}} />
-      <UserPForm properties={{gender:"male", height:155, name:"Matt", weight:75}}/>
+
+      <UserPForm properties={{gender:0, height:155, name:"Matt", weight:75}}/>      
+      {/*<PharmaceuticalCatalogue properties={{name: "Gai", type: 5, description: "Really big gai"}} />*/}
     </div>
   );
 }
