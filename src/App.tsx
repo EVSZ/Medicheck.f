@@ -7,8 +7,9 @@ import PharmaceuticalCatalogue from './Medication/PharmaceuticalCatalogue';
 function App() {
   return (
     <div className="App">
-      <NavigationBar/>
+      <NavigationBar />
       <PharmaceuticalCatalogue properties={{name: "Gai", type: 5, description: "Really big gai"}} />
+      <UserPForm properties={{gender:"male", height:155, name:"Matt", weight:75}}/>
     </div>
   );
 }
