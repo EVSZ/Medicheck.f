@@ -16,14 +16,14 @@ export default function PC({ properties }: { properties: PharmaceuticalCatalogue
         let medlist = searchedMeds.map((string, index) => 
         <div key={index}>
         <li>{string}</li>
-        <button>Voeg toe</button>
+        <button onClick={addMed}>Voeg toe</button>
         </div>
         );
         return medlist;
     }
     const addedMedication = [""];
-    const addedMedList = addedMedication.map((string) =>
-    <div>
+    const addedMedList = addedMedication.map((string, index) =>
+    <div key={index}>
         <li>{string}</li>
         <button>Verwijder</button>
     </div>
@@ -36,9 +36,18 @@ export default function PC({ properties }: { properties: PharmaceuticalCatalogue
         for (let i = 0; i < medication.length; i++) {
             if(input === medication[i]) {
                 temparray.push(medication[i]);
+                setMed(medication[i]);
             }
         }
         setSearchedMeds(temparray);
+    }
+
+    const [med, setMed] = useState(searchedMeds[0]);
+
+    function addMed() {
+        if (med !== null){
+            addedMedication.push(med);
+        }
     }
 
     return (
@@ -48,7 +57,7 @@ export default function PC({ properties }: { properties: PharmaceuticalCatalogue
             <button onClick={checkForMed}>Zoek</button>
             <ul>{returnMedList(searchedMeds)}</ul>
             <h3>Toegevoegde medicatie:</h3>
-            <ul>{addedMedList}</ul>
+            {addedMedList}
         </div>
     );
 }
