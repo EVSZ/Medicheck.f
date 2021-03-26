@@ -42,3 +42,12 @@ color: #414042;
   align-items: left;
   min-width:250px;
 }
+
+.App {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
