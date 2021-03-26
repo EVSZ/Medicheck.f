@@ -18,20 +18,22 @@ export default function UserPForm({ properties }: { properties: State }) {
     const [weight, setWeight] = useState<number>(properties.weight);
     const [age, setAge] = useState<string | undefined>();
     const [gender, setGender] = useState<string>(properties.gender);
-    const [preg, setPreg] = useState<boolean>(false);
-
+    const [pregnant, setPreg] = useState<boolean>(false);
+    
     function showPregnant() : JSX.Element {
         let checkbox: JSX.Element;
-        if (gender === "male") {
+        if (gender === "Male") {
             checkbox = <div> </div>;
-        } else if (gender === "female") {
+        } else if (gender === "Female") {
             checkbox = (<div className="UserPFormGroup">
                 <Form.Group>
                     <div className="UserPFormGrouplabel">
                         <Form.Label> Zwanger? </Form.Label>
                     </div>
                     <div className="UserPFormGroupInput">
-                        <input type="checkbox" />
+                        <input onSelect={() => {
+                            setPreg(true);
+                        }} type="checkbox" />
                     </div>
                 </Form.Group>
             </ div>);
@@ -44,12 +46,12 @@ export default function UserPForm({ properties }: { properties: State }) {
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
-            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, preg, age })
+            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
                 })
-            //console.log("Naam: " + name + " Height: " + height + " Weight: " + weight + " Age: " + age);
+            console.log("Naam: " + name + " Height: " + height + " Weight: " + weight + " Age: " + age + "Gender " + gender + "PREGGO " + pregnant);
         }}>
             <div className="UserPFormGroup">
                 <Form.Group>
@@ -125,7 +127,7 @@ export default function UserPForm({ properties }: { properties: State }) {
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios1"
                                 onChange={() => {
-                                    setGender("male");
+                                    setGender("Male");
                                     setPreg(false);
                                 }
                                 } />
@@ -135,7 +137,7 @@ export default function UserPForm({ properties }: { properties: State }) {
                                 name="formHorizontalRadios"
                                 id="formHorizontalRadios2"
                                 onChange={() => {
-                                    setGender("female");
+                                    setGender("Female");
                                     setPreg(true);
                                 }
                                 } />

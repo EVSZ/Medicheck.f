@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <NavigationBar/>
-      <UserPForm properties={{gender:"male", height:155, name:"Matt", weight:75}}
+      <UserPForm properties={{gender:"", height:155, name:"Matt", weight:75}}
       />
     </div>
   );
