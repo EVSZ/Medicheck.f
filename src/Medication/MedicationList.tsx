@@ -25,7 +25,7 @@ function Temp() {
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
-        setSearchedMed(["EchtGai"]);
+        setSearchedMed([""]);
         setSearchedMed([]);
     }
 
