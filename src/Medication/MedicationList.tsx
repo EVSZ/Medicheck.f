@@ -1,38 +1,32 @@
 import './PharmaceuticalCatalogue.css';
 import React, { useState } from "react";
-import { setUncaughtExceptionCaptureCallback } from 'node:process';
 
 function Temp() {
     const [tempMedList] = useState<string[]>(["med1", "med2", "med3"]);
 
     const [input, setInput] = useState<string>();
 
-    const [searchedMed, setSearchedMed] = useState<string>("");
+    const [searchedMed, setSearchedMed] = useState<string[]>([]);
     const [addedMedList] = useState<string[]>([]);
     
     const searchClick=() => {
-        let found: boolean = false;
-
         tempMedList.forEach(element => {
-            if (input === element && !found){
-                setSearchedMed(input);
-                found = true;
-            }
-            else if (!found){
-                setSearchedMed("");
+            if (input === element){
+                searchedMed.push(input);
+                setInput("");
             }
         });
     }
 
-    const addClick=() => {
-        if (searchedMed != ""){
-            addedMedList.push(searchedMed);
-            console.log({addedMedList});
-        }
+    const addClick=(index:number) => {
+        addedMedList.push(searchedMed[index]);
+        setSearchedMed([]);
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
+        setSearchedMed(["EchtGai"]);
+        setSearchedMed([]);
     }
 
     function returnMedList(addedMedList: string[]) {
@@ -40,6 +34,15 @@ function Temp() {
             <div key={index}>
                 <li>{string}</li>
                 <button onClick={() => removeClick(index)}>Verwijder</button>
+            </div>
+        );
+    }
+
+    function returnSearchedMeds(searchedMedList: string[]) {
+        return searchedMedList.map((string, index) =>
+            <div key={index}>
+                <li>{string}</li>
+                <button onClick={() => addClick(index)}>Voeg toe</button>
             </div>
         );
     }
@@ -55,9 +58,7 @@ function Temp() {
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
-                <a>{searchedMed}</a>
-                <br />
-                <button onClick={addClick}>Voeg toe</button>
+                {returnSearchedMeds(searchedMed)}
             </div>
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>

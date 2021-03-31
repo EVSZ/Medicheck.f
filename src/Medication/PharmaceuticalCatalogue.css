@@ -1,8 +1,7 @@
 .list{
     position: relative;
     text-align: center;
-    font-family: Comic Sans MS;
     width: 400px;
     padding: 10px;
-    border: 3px solid gray;
+    border: 2px solid gray;
 }
