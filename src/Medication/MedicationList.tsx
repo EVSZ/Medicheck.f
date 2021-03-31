@@ -25,8 +25,9 @@ function Temp() {
     }
 
     const addClick=() => {
-        if (searchedMed !== ""){
+        if (searchedMed != ""){
             addedMedList.push(searchedMed);
+            console.log({addedMedList});
         }
     }
 
@@ -35,13 +36,12 @@ function Temp() {
     }
 
     function returnMedList(addedMedList: string[]) {
-        let medlist = addedMedList.map((string, index) => 
+        return addedMedList.map((string, index) => 
             <div key={index}>
                 <li>{string}</li>
                 <button onClick={() => removeClick(index)}>Verwijder</button>
             </div>
         );
-        return medlist;
     }
 
     return (
@@ -51,7 +51,7 @@ function Temp() {
                 <input type="text" value={input} placeholder="Zoek medicatie" onChange={(e) => {setInput(e.target.value)}} />
             </div>
             <div>
-                <button onClick={searchClick}>stink knop</button>
+                <button onClick={searchClick}>Zoek</button>
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
@@ -61,7 +61,7 @@ function Temp() {
             </div>
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
-                {returnMedList}
+                {returnMedList(addedMedList)}
             </div>
         </div>
     );
