@@ -1,39 +1,70 @@
 import './PharmaceuticalCatalogue.css';
 import React, { useState } from "react";
 import { setUncaughtExceptionCaptureCallback } from 'node:process';
+import axios from 'axios';
 
-function Temp() {
-    const [tempMedList] = useState<string[]>(["med1", "med2", "med3"]);
+export interface Medication {
+    MedicationID: number;
+    Name: string;
+    Discription: string;
+    MedicineType: number;
+}
 
-    const [input, setInput] = useState<string>();
+function MedicationList() {
 
-    const [searchedMed, setSearchedMed] = useState<string>("");
-    const [addedMedList] = useState<string[]>([]);
-    
+    const [input, setInput] = useState<string>("");
+    const [MedList, setMedlist] = useState<Medication[]>([]);
+    const [searchedMed, setSearchedMed] = useState<Medication[]>([]);
+    const [addedMedList] = useState<Medication[]>([]);
+
+    const GetMedlist = async () => {
+        axios.get('http://localhost:8080/api/medication/getAll')
+        .then((response) => {
+            setMedlist(response.data);
+            localStorage.setItem('MedicationList', JSON.stringify(response.data))
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+          
+      }
+    const SetLocalMedicationList = async () => {
+        localStorage.setItem('MedicationList', JSON.stringify(MedList))
+    }
+
     const searchClick=() => {
-        let found: boolean = false;
-
-        tempMedList.forEach(element => {
-            if (input === element && !found){
-                setSearchedMed(input);
-                found = true;
-            }
-            else if (!found){
-                setSearchedMed("");
-            }
+        MedList.forEach(element => {
+                if (element.Name.includes(input) && input.length > 2)
+                {
+                    searchedMed.push(element);
+                }
+            
         });
     }
 
-    const addClick=() => {
-        if (searchedMed !== ""){
-            addedMedList.push(searchedMed);
-        }
+    const addClick=(index: number) => {
+        addedMedList.push(searchedMed[index])
+        searchedMed.splice(index,1)
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
     }
+    function GetCurrentMedicationList() : void
+    {
+        setMedlist(JSON.parse(localStorage.getItem('MedicationList')!))
+    }
 
+    function returnSearchMedList(searchedMed: string[]) {
+        let medlist = searchedMed.map((string, index) => 
+            <div key={index}>
+                <li>{string}</li>
+                <button onClick={() => addClick(index)}>VoegToe</button>
+            </div>
+        );
+        return medlist;
+    }
+    
     function returnMedList(addedMedList: string[]) {
         let medlist = addedMedList.map((string, index) => 
             <div key={index}>
@@ -55,9 +86,7 @@ function Temp() {
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
-                <a>{searchedMed}</a>
-                <br />
-                <button onClick={addClick}>Voeg toe</button>
+                {returnSearchMedList}
             </div>
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
@@ -67,4 +96,4 @@ function Temp() {
     );
 }
 
-export default Temp;
+export default MedicationList;

@@ -3,21 +3,26 @@ import { useState } from 'react';
 import { Form, InputGroup, Col, Button } from 'react-bootstrap';
 
 import axios from 'axios';
+import { Medication } from './Medication/MedicationList';
 
-interface State {
+export interface Patient 
+{
     name: string;
     height: number;
     weight: number;
     age?: string;
-    gender: string;
+    gender: String;
+    preg: boolean;
+    MedList: Medication[] | null;
 }
 
-export default function UserPForm({ properties }: { properties: State }) {
+export default function UserPForm({ properties }: { properties: Patient }) {
+    const [MedList, setMedlist] = useState<Medication[] | null>(properties.MedList);
     const [name, setName] = useState<string>(properties.name);
     const [height, setHeight] = useState<number>(properties.height);
     const [weight, setWeight] = useState<number>(properties.weight);
     const [age, setAge] = useState<string | undefined>();
-    const [gender, setGender] = useState<string>(properties.gender);
+    const [gender, setGender] = useState<String>(properties.gender);
     const [pregnant, setPreg] = useState<boolean>(false);
     
     function showPregnant() : JSX.Element {
@@ -43,10 +48,18 @@ export default function UserPForm({ properties }: { properties: State }) {
         return checkbox;
     }
 
+    function SetMedicationList() : void
+    {
+        setMedlist(JSON.parse(localStorage.getItem('MedicationList')!));
+    }
+
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
             axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
+            SetMedicationList();
+            console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + pregnant + " Weight: " + weight + " Age: " + age);
+            axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
