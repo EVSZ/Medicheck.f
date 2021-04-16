@@ -1,10 +1,7 @@
 import './PharmaceuticalCatalogue.css';
 import React, { useState } from "react";
-<<<<<<< Updated upstream
 import { setUncaughtExceptionCaptureCallback } from 'node:process';
-=======
 import axios from 'axios';
->>>>>>> Stashed changes
 
 export interface Medication {
     MedicationID: number;
@@ -15,12 +12,10 @@ export interface Medication {
 
 function MedicationList() {
 
+    const [input, setInput] = useState<string>("");
     const [MedList, setMedlist] = useState<Medication[]>([]);
-
-    const [input, setInput] = useState<string>();
-
-    const [searchedMed, setSearchedMed] = useState<string>("");
-    const [addedMedList] = useState<string[]>([]);
+    const [searchedMed, setSearchedMed] = useState<Medication[]>([]);
+    const [addedMedList] = useState<Medication[]>([]);
 
     const GetMedlist = async () => {
         axios.get('http://localhost:8080/api/medication/getAll')
@@ -38,30 +33,18 @@ function MedicationList() {
     }
 
     const searchClick=() => {
-<<<<<<< Updated upstream
-        let found: boolean = false;
-
-        tempMedList.forEach(element => {
-            if (input === element && !found){
-                setSearchedMed(input);
-                found = true;
-            }
-            else if (!found){
-                setSearchedMed("");
-=======
         MedList.forEach(element => {
-            if (input === element.Name){
-                searchedMed.push(input);
-                setInput("");
->>>>>>> Stashed changes
-            }
+                if (element.Name.includes(input) && input.length > 2)
+                {
+                    searchedMed.push(element);
+                }
+            
         });
     }
 
-    const addClick=() => {
-        if (searchedMed !== ""){
-            addedMedList.push(searchedMed);
-        }
+    const addClick=(index: number) => {
+        addedMedList.push(searchedMed[index])
+        searchedMed.splice(index,1)
     }
 
     const removeClick=(index:number) => {
@@ -72,6 +55,16 @@ function MedicationList() {
         setMedlist(JSON.parse(localStorage.getItem('MedicationList')!))
     }
 
+    function returnSearchMedList(searchedMed: string[]) {
+        let medlist = searchedMed.map((string, index) => 
+            <div key={index}>
+                <li>{string}</li>
+                <button onClick={() => addClick(index)}>VoegToe</button>
+            </div>
+        );
+        return medlist;
+    }
+    
     function returnMedList(addedMedList: string[]) {
         let medlist = addedMedList.map((string, index) => 
             <div key={index}>
@@ -93,9 +86,7 @@ function MedicationList() {
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
-                <a>{searchedMed}</a>
-                <br />
-                <button onClick={addClick}>Voeg toe</button>
+                {returnSearchMedList}
             </div>
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>

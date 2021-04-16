@@ -11,12 +11,8 @@ export interface Patient
     height: number;
     weight: number;
     age?: string;
-<<<<<<< Updated upstream
-    gender: string;
-=======
-    gender: number;
+    gender: String;
     MedList: Medication[] | null;
->>>>>>> Stashed changes
 }
 
 export default function UserPForm({ properties }: { properties: Patient }) {
@@ -25,7 +21,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
     const [height, setHeight] = useState<number>(properties.height);
     const [weight, setWeight] = useState<number>(properties.weight);
     const [age, setAge] = useState<string | undefined>();
-    const [gender, setGender] = useState<string>(properties.gender);
+    const [gender, setGender] = useState<String>(properties.gender);
     const [pregnant, setPreg] = useState<boolean>(false);
     
     function showPregnant() : JSX.Element {
@@ -59,13 +55,10 @@ export default function UserPForm({ properties }: { properties: Patient }) {
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
-<<<<<<< Updated upstream
             axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
-=======
             SetMedicationList();
             console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + preg + " Weight: " + weight + " Age: " + age);
             axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
->>>>>>> Stashed changes
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
