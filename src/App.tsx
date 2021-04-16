@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         
         <NavigationBar/>
-        <UserPForm properties={ gender:"Male", height:155, name:"Matt", weight:75, MedList: null }/>      
+        <UserPForm properties={{ preg: false, gender:"", height:155, name:"Matt", weight:75, MedList: null}}/>      
         <MedicationList />
         <AdviceGenerator/>
         
@@ -24,6 +24,7 @@ function App() {
         </Switch>
       </div>
     </Router>
+
   );
 }
 
