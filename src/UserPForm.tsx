@@ -12,7 +12,6 @@ export interface Patient
     weight: number;
     age?: string;
     gender: String;
-    preg: boolean;
     MedList: Medication[] | null;
 }
 
@@ -58,7 +57,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
             e.preventDefault();
             axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
             SetMedicationList();
-            console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + pregnant + " Weight: " + weight + " Age: " + age);
+            console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + preg + " Weight: " + weight + " Age: " + age);
             axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
                 .then(res => {
                     console.log(res);
