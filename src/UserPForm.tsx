@@ -3,16 +3,24 @@ import { useState } from 'react';
 import { Form, InputGroup, Col, Button } from 'react-bootstrap';
 
 import axios from 'axios';
+import { Medication } from './Medication/MedicationList';
 
-interface State {
+export interface Patient 
+{
     name: string;
     height: number;
     weight: number;
     age?: string;
+<<<<<<< Updated upstream
     gender: string;
+=======
+    gender: number;
+    MedList: Medication[] | null;
+>>>>>>> Stashed changes
 }
 
-export default function UserPForm({ properties }: { properties: State }) {
+export default function UserPForm({ properties }: { properties: Patient }) {
+    const [MedList, setMedlist] = useState<Medication[] | null>(properties.MedList);
     const [name, setName] = useState<string>(properties.name);
     const [height, setHeight] = useState<number>(properties.height);
     const [weight, setWeight] = useState<number>(properties.weight);
@@ -43,10 +51,21 @@ export default function UserPForm({ properties }: { properties: State }) {
         return checkbox;
     }
 
+    function SetMedicationList() : void
+    {
+        setMedlist(JSON.parse(localStorage.getItem('MedicationList')!));
+    }
+
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
+<<<<<<< Updated upstream
             axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
+=======
+            SetMedicationList();
+            console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + preg + " Weight: " + weight + " Age: " + age);
+            axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
+>>>>>>> Stashed changes
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
