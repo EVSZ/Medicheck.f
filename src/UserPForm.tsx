@@ -24,6 +24,8 @@ export default function UserPForm({ properties }: { properties: Patient }) {
     const [age, setAge] = useState<string | undefined>();
     const [gender, setGender] = useState<String>(properties.gender);
     const [pregnant, setPreg] = useState<boolean>(false);
+
+    const [patient] = useState<Patient>();
     
     function showPregnant() : JSX.Element {
         let checkbox: JSX.Element;
@@ -46,12 +48,6 @@ export default function UserPForm({ properties }: { properties: Patient }) {
             checkbox = <div> </div>
         }
         return checkbox;
-    }
-    
-    function MergeInformation(e)
-    {
-        e.preventDefault();
-        properties.functionCallFromParent();
     }
 
     function SetMedicationList() : void

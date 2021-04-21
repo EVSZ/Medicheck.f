@@ -8,6 +8,7 @@ export interface Medication {
     Name: string;
     Discription: string;
     MedicineType: number;
+    GetCurrentMedicationList: () => Medication[];
 }
 
 function MedicationList() {
@@ -92,6 +93,9 @@ function MedicationList() {
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
                 {returnMedList}
+            </div>
+            <div>
+                <button value="Medication opslaan" onClick={SetLocalMedicationList}></button>
             </div>
         </div>
     );
