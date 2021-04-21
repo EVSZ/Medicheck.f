@@ -45,6 +45,7 @@ function MedicationList() {
     const addClick=(index: number) => {
         addedMedList.push(searchedMed[index])
         searchedMed.splice(index,1)
+        localStorage.setItem('MedicationList', JSON.stringify(MedList))
     }
 
     const removeClick=(index:number) => {
@@ -82,7 +83,7 @@ function MedicationList() {
                 <input type="text" value={input} placeholder="Zoek medicatie" onChange={(e) => {setInput(e.target.value)}} />
             </div>
             <div>
-                <button onClick={searchClick}>stink knop</button>
+                <button onClick={searchClick}>Zoek</button>
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>

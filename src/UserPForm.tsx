@@ -47,6 +47,12 @@ export default function UserPForm({ properties }: { properties: Patient }) {
         }
         return checkbox;
     }
+    
+    function MergeInformation(e)
+    {
+        e.preventDefault();
+        properties.functionCallFromParent();
+    }
 
     function SetMedicationList() : void
     {
@@ -56,15 +62,12 @@ export default function UserPForm({ properties }: { properties: Patient }) {
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
-            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
             SetMedicationList();
-            console.log("Naam: " + name + " Height: " + height + " Gender: " + gender + " Preggo: " + pregnant + " Weight: " + weight + " Age: " + age);
             axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
                 })
-            console.log("Naam: " + name + " Height: " + height + " Weight: " + weight + " Age: " + age + "Gender " + gender + "PREGGO " + pregnant);
         }}>
             <div className="UserPFormGroup">
                 <Form.Group>
@@ -179,7 +182,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
             </div>
             <div className="UserPFormGroup">
                 <Form.Group>
-                    <Button type="submit">Send</Button>
+                    <Button type="submit">Sla gegevens op</Button>
                 </Form.Group>
             </div>
         </Form>

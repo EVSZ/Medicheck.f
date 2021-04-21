@@ -1,17 +1,19 @@
 import './PharmaceuticalCatalogue.css';
-import React, { useState } from "react";
+import './GenerateAdvice.css';
 import axios from 'axios';
 import Medication from '../Medication/MedicationList';
-import { Console } from 'node:console';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function AdviceGenerator() 
+
+function AdviceGenerator(props) 
 {
     let AdviceResult:Boolean; 
 
+    
     function GenerateAdvice(): void {
         axios.post(`http://localhost:8080/api/Algorithme/post`, localStorage.getItem('MedicationList'))
+
         .then((response) => {
                 AdviceResult = response.data;
         })
@@ -23,11 +25,8 @@ function AdviceGenerator()
 
     return (
         <body >
-            <div className="AdviceButton">
-                <button onClick={GenerateAdvice}><Link to="/Result"></Link></button>
-            </div>
+            <button className="GenerateAdvice" onClick={GenerateAdvice}><Link to="/Result"></Link></button>
         </body>
-
     );
 }
 
