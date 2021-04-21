@@ -14,8 +14,7 @@ function  AdviceGenerator()
         axios.get(`http://localhost:8080/algorithm/getAdvice`)
 
         .then((response) => {
-                AdviceResult = response.data;
-                console.log(response.data);
+                alert(response.data);
         })
         .catch((error) => {
             console.log(error);
