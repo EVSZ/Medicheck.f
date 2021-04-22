@@ -59,7 +59,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
         <Form onSubmit={(e) => {
             e.preventDefault();
             SetMedicationList();
-            axios.post(`http://localhost:8080/api/patienten/post`, JSON.stringify(properties))
+            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
