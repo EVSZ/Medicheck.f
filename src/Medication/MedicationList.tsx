@@ -1,6 +1,5 @@
 import './PharmaceuticalCatalogue.css';
 import React, { useState } from "react";
-import { setUncaughtExceptionCaptureCallback } from 'node:process';
 import axios from 'axios';
 
 export interface Medication {
@@ -22,7 +21,6 @@ function MedicationList() {
         axios.get('http://localhost:8080/api/medication/getAll')
         .then((response) => {
             setMedlist(response.data);
-            localStorage.setItem('MedicationList', JSON.stringify(response.data));
 
             console.log(MedList);
         })
@@ -34,10 +32,11 @@ function MedicationList() {
 
     const searchClick=() => {
         GetMedlist();
+
         MedList.forEach(element => {
-                if (element.Name == input){
-                    searchedMed.push(element);
-                }
+            if (element.Name == input){
+                searchedMed.push(element);
+            }  
         });
 
         console.log(searchedMed);
@@ -45,22 +44,16 @@ function MedicationList() {
 
     const addClick=(index: number) => {
         addedMedList.push(searchedMed[index])
-        searchedMed.splice(index,1)
-        localStorage.setItem('MedicationList', JSON.stringify(MedList))
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
     }
-    function GetCurrentMedicationList() : void
-    {
-        setMedlist(JSON.parse(localStorage.getItem('MedicationList')!))
-    }
 
     function returnSearchMedList(searchedMed: string[]) {
-        let medlist = searchedMed.map((string, index) => 
+        let medlist = searchedMed.map((Name, index) => 
             <div key={index}>
-                <li>{string}</li>
+                <li>{Name}</li>
                 <button onClick={() => addClick(index)}>VoegToe</button>
             </div>
         );

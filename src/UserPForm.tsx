@@ -17,7 +17,6 @@ export interface Patient
 }
 
 export default function UserPForm({ properties }: { properties: Patient }) {
-    const [MedList, setMedlist] = useState<Medication[] | null>(properties.MedList);
     const [name, setName] = useState<string>(properties.name);
     const [height, setHeight] = useState<number>(properties.height);
     const [weight, setWeight] = useState<number>(properties.weight);
@@ -50,15 +49,9 @@ export default function UserPForm({ properties }: { properties: Patient }) {
         return checkbox;
     }
 
-    function SetMedicationList() : void
-    {
-        setMedlist(JSON.parse(localStorage.getItem('MedicationList')!));
-    }
-
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
-            SetMedicationList();
             axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
                 .then(res => {
                     console.log(res);
