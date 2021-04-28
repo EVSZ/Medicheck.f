@@ -22,25 +22,25 @@ function MedicationList() {
         axios.get('http://localhost:8080/api/medication/getAll')
         .then((response) => {
             setMedlist(response.data);
-            localStorage.setItem('MedicationList', JSON.stringify(response.data))
+            localStorage.setItem('MedicationList', JSON.stringify(response.data));
+
+            console.log(MedList);
         })
         .catch((error) => {
             console.log(error);
         })
           
-      }
-    const SetLocalMedicationList = async () => {
-        localStorage.setItem('MedicationList', JSON.stringify(MedList))
     }
 
     const searchClick=() => {
+        GetMedlist();
         MedList.forEach(element => {
-                if (element.Name.includes(input) && input.length > 2)
-                {
+                if (element.Name == input){
                     searchedMed.push(element);
                 }
-            
         });
+
+        console.log(searchedMed);
     }
 
     const addClick=(index: number) => {
@@ -93,9 +93,6 @@ function MedicationList() {
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
                 {returnMedList}
-            </div>
-            <div>
-                <button value="Medication opslaan" onClick={SetLocalMedicationList}></button>
             </div>
         </div>
     );
