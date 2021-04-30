@@ -29,7 +29,7 @@ function MedicationList() {
 
     const PostMedlist = async () => {
         try {
-            if (addedMedList.length == 0){
+            if (addedMedList.length != 0){
                 addedMedList.forEach(element => {
                 const payload = {'Medicine': addedMedList[addedMedList.indexOf(element)]};
     
