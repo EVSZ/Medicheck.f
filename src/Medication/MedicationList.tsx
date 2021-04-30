@@ -31,14 +31,11 @@ function MedicationList() {
         GetMedlist();
         searchedMed.splice(0, searchedMed.length);
 
-        console.log(MedList);
         MedList.forEach(element => {
             if (element.name.includes(input)){
                 searchedMed.push(element);
             }
         });
-
-        console.log(searchedMed);
     }
 
     const addClick=(index: number) => {
@@ -50,10 +47,6 @@ function MedicationList() {
     }
 
     function returnSearchMedList(searchedMed: Medication[]) {
-        if (searchedMed[0] != null){
-            console.log(searchedMed[0]);
-        }
-        
         let medlist = searchedMed.map((Medication, index) => 
             <div key={index}>
                 <li>{Medication.name}</li>
