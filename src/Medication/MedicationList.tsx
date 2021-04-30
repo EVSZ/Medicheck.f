@@ -27,6 +27,23 @@ function MedicationList() {
         })
     }
 
+    const PostMedlist = async () => {
+        try {
+            addedMedList.forEach(element => {
+                const payload = {'Medicine': addedMedList[addedMedList.indexOf(element)]};
+    
+                axios.post('http://localhost:8080/api/medication/PostMedicine', payload)
+                .then(() => {
+                    console.log(element);
+                })
+            })
+            alert("Medicijnen zijn opgestuurd!");
+        } catch (error) {
+            console.log(error);
+        }
+        addedMedList.splice(0, addedMedList.length);
+    }
+
     const searchClick=() => {
         GetMedlist();
         searchedMed.splice(0, searchedMed.length);
@@ -83,6 +100,7 @@ function MedicationList() {
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
                 {returnMedList(addedMedList)}
+                <button onClick={PostMedlist}>Submit medicijnen</button>
             </div>
         </div>
     );
