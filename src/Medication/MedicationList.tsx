@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 export interface Medication {
-    MedicationID: number;
-    Name: string;
-    Discription: string;
-    MedicineType: number;
+    id: number;
+    name: string;
+    Description: string;
+    medicineType: number;
     GetCurrentMedicationList: () => Medication[];
 }
 
@@ -14,29 +14,28 @@ function MedicationList() {
 
     const [input, setInput] = useState<string>("");
     const [MedList, setMedlist] = useState<Medication[]>([]);
-    const [searchedMed, setSearchedMed] = useState<Medication[]>([]);
+    const [searchedMed] = useState<Medication[]>([]);
     const [addedMedList] = useState<Medication[]>([]);
 
     const GetMedlist = async () => {
         axios.get('http://localhost:8080/api/medication/getAll')
         .then((response) => {
             setMedlist(response.data);
-
-            console.log(MedList);
         })
         .catch((error) => {
             console.log(error);
         })
-          
     }
 
     const searchClick=() => {
         GetMedlist();
+        searchedMed.splice(0, searchedMed.length);
 
+        console.log(MedList);
         MedList.forEach(element => {
-            if (element.Name == input){
+            if (element.name.includes(input)){
                 searchedMed.push(element);
-            }  
+            }
         });
 
         console.log(searchedMed);
@@ -50,20 +49,24 @@ function MedicationList() {
         addedMedList.splice(index, 1);
     }
 
-    function returnSearchMedList(searchedMed: string[]) {
-        let medlist = searchedMed.map((Name, index) => 
+    function returnSearchMedList(searchedMed: Medication[]) {
+        if (searchedMed[0] != null){
+            console.log(searchedMed[0]);
+        }
+        
+        let medlist = searchedMed.map((Medication, index) => 
             <div key={index}>
-                <li>{Name}</li>
+                <li>{Medication.name}</li>
                 <button onClick={() => addClick(index)}>VoegToe</button>
             </div>
         );
         return medlist;
     }
     
-    function returnMedList(addedMedList: string[]) {
-        let medlist = addedMedList.map((string, index) => 
+    function returnMedList(addedMedList: Medication[]) {
+        let medlist = addedMedList.map((Medication, index) => 
             <div key={index}>
-                <li>{string}</li>
+                <li>{Medication.name}</li>
                 <button onClick={() => removeClick(index)}>Verwijder</button>
             </div>
         );
@@ -72,6 +75,7 @@ function MedicationList() {
 
     return (
         <div className="list">
+            
             <div>
                 <h5>Zoek uw medicatie:</h5>
                 <input type="text" value={input} placeholder="Zoek medicatie" onChange={(e) => {setInput(e.target.value)}} />
@@ -81,11 +85,11 @@ function MedicationList() {
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
-                {returnSearchMedList}
+                {returnSearchMedList(searchedMed)}
             </div>
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
-                {returnMedList}
+                {returnMedList(addedMedList)}
             </div>
         </div>
     );
