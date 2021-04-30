@@ -5,6 +5,8 @@ import axios from 'axios';
 export interface Medication {
     id: number;
     name: string;
+    hasRule: boolean;
+    ruleID: number;
     Description: string;
     medicineType: number;
     GetCurrentMedicationList: () => Medication[];
