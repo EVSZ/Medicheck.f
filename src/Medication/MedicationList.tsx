@@ -29,7 +29,8 @@ function MedicationList() {
 
     const PostMedlist = async () => {
         try {
-            addedMedList.forEach(element => {
+            if (addedMedList.length == 0){
+                addedMedList.forEach(element => {
                 const payload = {'Medicine': addedMedList[addedMedList.indexOf(element)]};
     
                 axios.post('http://localhost:8080/api/medication/PostMedicine', payload)
@@ -38,6 +39,10 @@ function MedicationList() {
                 })
             })
             alert("Medicijnen zijn opgestuurd!");
+            }
+            else{
+                alert("U heeft geen toegevoegde medicatie...");
+            }
         } catch (error) {
             console.log(error);
         }
