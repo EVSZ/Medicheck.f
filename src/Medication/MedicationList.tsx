@@ -38,6 +38,7 @@ function MedicationList() {
                     console.log(element);
                 })
             })
+            addedMedList.splice(0, addedMedList.length);
             alert("Medicijnen zijn opgestuurd!");
             }
             else{
@@ -46,7 +47,6 @@ function MedicationList() {
         } catch (error) {
             console.log(error);
         }
-        addedMedList.splice(0, addedMedList.length);
     }
 
     const searchClick=() => {
