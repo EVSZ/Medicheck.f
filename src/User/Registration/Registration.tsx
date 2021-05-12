@@ -7,7 +7,7 @@ export default function RegistrationForm() {
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [password1, setPassword1] = useState<string>("");
+    const [password, setPassword1] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
 
     function DisplayForm() {
@@ -40,7 +40,7 @@ export default function RegistrationForm() {
                         <InputGroup>
                             <Form.Control
                                 type="password"
-                                value={password1}
+                                value={password}
                                 onChange={(e) => {
                                     setPassword1(e.target.value)
                                 }}
@@ -96,7 +96,7 @@ export default function RegistrationForm() {
                         <InputGroup>
                             <Form.Control
                                 type="text"
-                                value={password1}
+                                value={password}
                                 onChange={(e) => {
                                     setPassword1(e.target.value)
                                 }}
@@ -151,14 +151,22 @@ export default function RegistrationForm() {
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
-            if (password1 === password2) {
-                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, { username, email, password1 })
+            if (login) {
+                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, { username, password })
                     .then(res => {
-                        console.log(res);
-                        console.log(res.data);
+                        console.log(res)
+                        console.log(res.data)
                     })
             } else {
-                console.log("jammer man")
+                if (password === password2) {
+                    axios.post(`http://localhost:8080/api/register/post/accountInfo`, { username, email, password })
+                        .then(res => {
+                            console.log(res);
+                            console.log(res.data);
+                        })
+                } else {
+                    console.log("jammer man")
+                }
             }
         }}>
             <div>
