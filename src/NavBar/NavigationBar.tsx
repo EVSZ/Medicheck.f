@@ -6,7 +6,7 @@ export interface NavigationBarProps {
 
 }
  
-const NavigationBar: React.SFC<NavigationBarProps> = () => {
+export default function NavigationBar() {
     return ( 
         <nav>
             <ul>
@@ -17,5 +17,3 @@ const NavigationBar: React.SFC<NavigationBarProps> = () => {
         </nav>
      );
 }
- 
-export default NavigationBar;
