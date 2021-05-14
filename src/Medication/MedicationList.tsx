@@ -29,36 +29,21 @@ function MedicationList() {
         })
     }
 
-    const PostMedlist = async () => {
-        if (addedMedList.length != 0){
-            addedMedList.forEach(element => {
-                const payload = {'Medicine': addedMedList[addedMedList.indexOf(element)]};
-        
-                axios.post('http://localhost:8080/api/medication/PostMedicine', payload)
-                .catch((error) => {
-                    console.log(error);
-                })
-            })
-        addedMedList.splice(0, addedMedList.length);
-        alert("Medicijnen zijn opgestuurd!");
-        }
-        else{
-            alert("U heeft geen toegevoegde medicatie...");
-        }
-    }
-
     const [adviceResult, setAdviceResult] = useState<Boolean>();
     const [finalAdvice, setFinalAdvice] = useState<String>("");
     
     function GenerateAdvice(): void {
-        PostMedlist();
+        let data = addedMedList;
+        let json = JSON.stringify(data);
 
-        axios.get(`http://localhost:8080/algorithm/getAdvice`)
+        axios.post(`http://localhost:8080/algorithm/getAdvice`, json)
     
         .then((response) => {
             console.log(response.data);
             setAdviceResult(response.data);
     
+            addedMedList.splice(0, addedMedList.length);
+
             if (adviceResult) setFinalAdvice("U hoeft geen contact op te nemen met een dokter.");
             else setFinalAdvice("Het is verstandig om contact op te nemen met een dokter.");
         })
@@ -66,7 +51,7 @@ function MedicationList() {
             console.log(error);
             setFinalAdvice("Er lijkt is iets mis gegaan. We konden op dit moment geen advies genereren, onze excuses.");
         })
-      }
+    }
 
     const searchClick=() => {
         GetMedlist();
