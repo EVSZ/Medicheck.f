@@ -31,22 +31,27 @@ function MedicationList() {
     }
 
     const PostMedlist = async () => {
-        if (addedMedList.length != 0){
-            var payload = {addedMedList};
+        try {
+            if (addedMedList.length != 0){
+                addedMedList.forEach(element => {
+                    const payload = {'Medicine': addedMedList[addedMedList.indexOf(element)]};
         
-            axios.post('http://localhost:8080/api/medication/PostMedicine', payload)
-            .then(() => {
-                setSent(true);
-
-                addedMedList.splice(0, addedMedList.length);
-                alert("Medicijnen zijn opgestuurd!");
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        }
-        else{
-            alert("U heeft geen toegevoegde medicatie...");
+                    axios.post('http://localhost:8080/api/medication/PostMedicine', payload)
+                    .then(() => {
+                        setSent(true);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                })
+            addedMedList.splice(0, addedMedList.length);
+            alert("Medicijnen zijn opgestuurd!");
+            }
+            else{
+                alert("U heeft geen toegevoegde medicatie...");
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -56,22 +61,26 @@ function MedicationList() {
     function GenerateAdvice(): void {
         PostMedlist();
 
-        if (sent){
-            axios.get(`http://localhost:8080/algorithm/getAdvice`)
+        try{
+            if (sent){
+                axios.get(`http://localhost:8080/algorithm/getAdvice`)
     
-            .then((response) => {
-                console.log(response.data);
-                setAdviceResult(response.data);
+                .then((response) => {
+                        console.log(response.data);
+                        setAdviceResult(response.data);
     
-                if (adviceResult) setFinalAdvice("U hoeft geen contact op te nemen met een dokter.");
-                else setFinalAdvice("Het is verstandig om contact op te nemen met een dokter.");
-            })
-            .catch((error) => {
-                console.log(error);
-                setFinalAdvice("Er lijkt is iets mis gegaan. We konden op dit moment geen advies genereren, onze excuses.");
-            })
+                        if (adviceResult) setFinalAdvice("U hoeft geen contact op te nemen met een dokter.");
+                        else setFinalAdvice("Het is verstandig om contact op te nemen met een dokter.");
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setFinalAdvice("Er lijkt is iets mis gegaan. We konden op dit moment geen advies genereren, onze excuses.");
+                })
+            }
         }
-
+        catch(error){
+            console.log(error);
+        }
         setSent(false);
       }
 
