@@ -32,7 +32,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
             checkbox = <div> </div>;
         } else if (gender === "Female") {
             checkbox = (<div className="UserPFormGroup">
-                <Form.Group>
+                 <Form.Group>
                     <div className="UserPFormGrouplabel">
                         <Form.Label> Zwanger? </Form.Label>
                     </div>

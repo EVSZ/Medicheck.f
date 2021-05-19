@@ -35,8 +35,8 @@ function MedicationList() {
     function GenerateAdvice(): void {
         let data = addedMedList;
         let json = JSON.stringify(data);
-
-        axios.post(`http://localhost:8080/algorithm/getAdvice`, json)
+        console.log(data);
+        axios.post(`http://localhost:8080/algorithm/getAdvice`, addedMedList)
     
         .then((response) => {
             console.log(response.data);
