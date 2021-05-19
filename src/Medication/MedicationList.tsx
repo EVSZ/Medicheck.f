@@ -32,6 +32,7 @@ function MedicationList() {
     const [adviceResult, setAdviceResult] = useState<Boolean>();
     const [finalAdvice, setFinalAdvice] = useState<String>("");
     
+    //test
     function GenerateAdvice(): void {
         let data = addedMedList;
         let json = JSON.stringify(data);
