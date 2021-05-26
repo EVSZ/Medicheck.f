@@ -1,0 +1,62 @@
+/*Body & Typography*/
+body {
+    margin: 0;
+    font-family: 'Open Sans';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color:#F7F7F7;  
+}
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 32px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 20px;
+    font-weight: bold;
+}
+h5{
+    font-size: 18px;
+}
+h6 {
+    font-size: 16px;
+}
+.bodyText{
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration-color: #313131;
+}
+.hyperLink {
+    text-decoration: underline;
+    font-weight: bold;
+}
+ul {
+    list-style: circle;
+}
+li {
+    list-style: georgian;
+}
+
+/*UI Components*/
+.btnNormal {
+    width: 140px;
+    height: 35px;
+    font-weight: 15px;
+    font-weight: bold;
+}
+.btnLarge {
+    width: 140px;
+    height: 45px;
+    font-weight: 17px;
+    font-weight: bold; 
+}
+.btnSmall {
+    width: 140px;
+    height: 30px;
+    font-weight: 13px;
+    font-weight: bold;  
+}
