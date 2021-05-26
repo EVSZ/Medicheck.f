@@ -11,11 +11,11 @@ import Profile from './User/Profile/Profile';
 
 function App(this: any) {
   const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState();
 
-  function parentFunction(Username:any, Password:any){
+  function parentFunction(Username:any, Email:any){
     setUsername(Username);
-    setPassword(Password);
+    setEmail(Email);
   }
 
   return (
@@ -36,7 +36,7 @@ function App(this: any) {
             <AdviceGenerator />
           </Route>
           <Route path="/Personal">
-            <Profile Username={username} Password={password}/>
+            <Profile Username={username} Email={email}/>
           </Route>
         </Switch>
       </div>

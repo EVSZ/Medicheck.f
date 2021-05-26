@@ -5,10 +5,12 @@ import axios from 'axios';
 export default function RegistrationForm(props:any) {
 
     const [login, setLogin] = useState<boolean>(true);
-    const [username, setUsername] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
+    const [username, setUsername] = useState<any>("");
+    const [email, setEmail] = useState<any>("");
     const [password, setPassword1] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
+
+    const [loggedIn, setLoggedIn] = useState<String>("");
 
     function DisplayForm() {
         if (login) {
@@ -154,11 +156,19 @@ export default function RegistrationForm(props:any) {
             if (login) {
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, { username, password })
                     .then(res => {
-                        console.log(res)
-                        console.log(res.data)
+                        console.log(res);
+                        console.log(res.data);
                         console.log("ingelogd");
+
+                        setUsername(res.data.Username);
+                        setEmail(res.data.EmailAddress);
+
+                        setLoggedIn("Succesvol ingelogd");
                         
-                        props.functionCallFromParent(username, password);
+                        props.functionCallFromParent(username, email);
+                    })
+                    .catch(() => {
+                        setLoggedIn("Uw inloggegevens waren incorrect");
                     })
             } else {
                 if (password === password2) {
@@ -166,9 +176,13 @@ export default function RegistrationForm(props:any) {
                         .then(res => {
                             console.log(res);
                             console.log(res.data);
+
+                            setLoggedIn("Account aangemaakt");
                         })
                 } else {
-                    console.log("jammer man")
+                    console.log("jammer man");
+
+                    setLoggedIn("Er is iets mis gegaan");
                 }
             }
         }}>
@@ -177,6 +191,9 @@ export default function RegistrationForm(props:any) {
             </div>
             <div>
                 {DisplayButtons()}
+            </div>
+            <div>
+                <a>{loggedIn}</a>
             </div>
         </Form>
     );
