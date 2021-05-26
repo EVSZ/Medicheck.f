@@ -7,6 +7,7 @@ import AdviceGenerator from './Advice/GenerateAdvice'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Result from './Advice/GetResultAdvice';
 import Registration from './User/Registration/Registration'
+import Profile from './User/Profile/Profile';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
             <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
             <MedicationList />
             <AdviceGenerator />
+          </Route>
+          <Route path="/Personal">
+            <Profile/>
           </Route>
         </Switch>
       </div>
