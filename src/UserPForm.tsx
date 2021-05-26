@@ -154,7 +154,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
             <div className="UserPFormGroup">
                 <Form.Group>
                     <div className="UserPFormGroupLabel">
-                        <Form.Label> Leeftijd: </Form.Label>
+                        <Form.Label> Geboortedatum: </Form.Label>
                     </div>
                     <div className="UserPFormGroupInput">
                         <InputGroup>

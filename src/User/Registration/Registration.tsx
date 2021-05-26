@@ -2,7 +2,7 @@ import react, { useState } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 
-export default function RegistrationForm() {
+export default function RegistrationForm(props:any) {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
@@ -156,6 +156,9 @@ export default function RegistrationForm() {
                     .then(res => {
                         console.log(res)
                         console.log(res.data)
+                        console.log("ingelogd");
+                        
+                        props.functionCallFromParent(username, password);
                     })
             } else {
                 if (password === password2) {

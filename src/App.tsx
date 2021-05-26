@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import NavigationBar from './NavBar/NavigationBar';
 import UserPForm from './UserPForm';
@@ -9,7 +9,15 @@ import Result from './Advice/GetResultAdvice';
 import Registration from './User/Registration/Registration'
 import Profile from './User/Profile/Profile';
 
-function App() {
+function App(this: any) {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+
+  function parentFunction(Username:any, Password:any){
+    setUsername(Username);
+    setPassword(Password);
+  }
+
   return (
     <Router>
       <div className="App">
@@ -20,7 +28,7 @@ function App() {
             <Result />
           </Route>
           <Route path="/Registration">
-            <Registration />
+            <Registration functionCallFromParent={parentFunction.bind(this)} />
           </Route>
           <Route path="/Advice">
             <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
@@ -28,7 +36,7 @@ function App() {
             <AdviceGenerator />
           </Route>
           <Route path="/Personal">
-            <Profile/>
+            <Profile Username={username} Password={password}/>
           </Route>
         </Switch>
       </div>
