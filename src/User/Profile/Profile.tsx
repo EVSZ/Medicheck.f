@@ -8,8 +8,10 @@ export default function Profile(props:any) {
     const name = props.Name;
     const birthDate = props.BirthDate;
     const gender = props.Gender;
+    const weight = props.Weight;
+    const length = props.Length;
 
-    if(name != null && email != null && birthDate != null && gender != null) {
+    if(name != null) {
         return (
             <div className="ProfileContainer">
                 <div className="Profile">
@@ -26,6 +28,12 @@ export default function Profile(props:any) {
                 </div>
                 <div>
                     <a>Uw geslacht: {gender}</a>
+                </div>
+                <div>
+                    <a>Uw gewicht: {weight}</a>
+                </div>
+                <div>
+                    <a>Uw lengte: {length}</a>
                 </div>
             </div>
         )

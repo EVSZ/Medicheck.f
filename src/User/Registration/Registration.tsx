@@ -12,6 +12,8 @@ export default function RegistrationForm(props:any) {
     const [name, setName] = useState<String>("");
     const [birthDate, setBirthDate] = useState<String>("");
     const [gender, setGender] = useState<String>("");
+    const [weight, setWeight] = useState<string>("");
+    const [length, setLength] = useState<string>("");
 
     const [loggedIn, setLoggedIn] = useState<String>("");
 
@@ -168,10 +170,12 @@ export default function RegistrationForm(props:any) {
                             setName(String(res.data.name));
                             setBirthDate(String(res.data.birthDate));
                             setGender(String(res.data.gender));
+                            setWeight(String(res.data.healthInfo.weight));
+                            setLength(String(res.data.healthInfo.length));
     
                             setLoggedIn("Succesvol ingelogd");
                             
-                            props.functionCallFromParent(name, email, birthDate, gender);
+                            props.functionCallFromParent(name, email, birthDate, gender, weight, length);
                         } else {
                             setLoggedIn("Uw inloggegevens waren incorrect");
                         }

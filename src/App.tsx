@@ -14,12 +14,16 @@ function App(this: any) {
   const [name, setName] = useState<string>("");
   const [birthDate, setBirthDate] = useState<string>("");
   const [gender, setGender] = useState<string>("");
+  const [weight, setWeight] = useState<string>("");
+  const [length, setLength] = useState<string>("");
 
-  function parentFunction(Name:string, Email:string, BirthDate:string, Gender:string){
+  function parentFunction(Name:string, Email:string, BirthDate:string, Gender:string, Weight:string, Length:string){
     setName(Name);
     setEmail(Email);
     setBirthDate(BirthDate);
     setGender(Gender);
+    setWeight(Weight);
+    setLength(Length);
   }
 
   return (
@@ -40,7 +44,7 @@ function App(this: any) {
             <AdviceGenerator />
           </Route>
           <Route path="/Personal">
-            <Profile Name={name} Email={email} BirthDate={birthDate} Gender={gender}/>
+            <Profile Name={name} Email={email} BirthDate={birthDate} Gender={gender} Weight={weight} Length={length}/>
           </Route>
         </Switch>
       </div>
