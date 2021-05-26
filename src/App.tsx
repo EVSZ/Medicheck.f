@@ -10,12 +10,16 @@ import Registration from './User/Registration/Registration'
 import Profile from './User/Profile/Profile';
 
 function App(this: any) {
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [birthDate, setBirthDate] = useState<string>("");
+  const [gender, setGender] = useState<string>("");
 
-  function parentFunction(Username:any, Email:any){
-    setUsername(Username);
+  function parentFunction(Name:string, Email:string, BirthDate:string, Gender:string){
+    setName(Name);
     setEmail(Email);
+    setBirthDate(BirthDate);
+    setGender(Gender);
   }
 
   return (
@@ -36,7 +40,7 @@ function App(this: any) {
             <AdviceGenerator />
           </Route>
           <Route path="/Personal">
-            <Profile Username={username} Email={email}/>
+            <Profile Name={name} Email={email} BirthDate={birthDate} Gender={gender}/>
           </Route>
         </Switch>
       </div>

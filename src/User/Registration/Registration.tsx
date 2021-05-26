@@ -9,6 +9,9 @@ export default function RegistrationForm(props:any) {
     const [email, setEmail] = useState<any>("");
     const [password, setPassword1] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
+    const [name, setName] = useState<String>("");
+    const [birthDate, setBirthDate] = useState<String>("");
+    const [gender, setGender] = useState<String>("");
 
     const [loggedIn, setLoggedIn] = useState<String>("");
 
@@ -154,21 +157,24 @@ export default function RegistrationForm(props:any) {
         <Form onSubmit={(e) => {
             e.preventDefault();
             if (login) {
-                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, { username, password })
+                const payload = {username, password}
+                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
                         console.log(res);
                         console.log(res.data);
-                        console.log("ingelogd");
 
-                        setUsername(res.data.Username);
-                        setEmail(res.data.EmailAddress);
-
-                        setLoggedIn("Succesvol ingelogd");
-                        
-                        props.functionCallFromParent(username, email);
-                    })
-                    .catch(() => {
-                        setLoggedIn("Uw inloggegevens waren incorrect");
+                        if (res.data != ""){
+                            setEmail(String(res.data.EmailAddress));
+                            setName(String(res.data.name));
+                            setBirthDate(String(res.data.birthDate));
+                            setGender(String(res.data.gender));
+    
+                            setLoggedIn("Succesvol ingelogd");
+                            
+                            props.functionCallFromParent(name, email, birthDate, gender);
+                        } else {
+                            setLoggedIn("Uw inloggegevens waren incorrect");
+                        }
                     })
             } else {
                 if (password === password2) {
