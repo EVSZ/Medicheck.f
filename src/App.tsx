@@ -16,6 +16,7 @@ function App()
         <NavigationBar/>
         <UserPForm properties={{ preg: false, gender:"", height:155, name:"Matt", weight:75, MedList: null}} />      
         <MedicationList />
+        <AdviceGenerator/>
         
         <Switch>
             <Route path="/Result">
