@@ -6,8 +6,8 @@ import MedicationList from './Medication/MedicationList';
 import AdviceGenerator from './Advice/GenerateAdvice'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Result from './Advice/GetResultAdvice';
-import Registration from './User/Registration/Registration'
-import Profile from './User/Profile/Profile';
+import Registration from './User/Registration'
+import Profile from './User/Profile';
 import Styleguidetest from './Styleguidetest';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {fas} from '@fortawesome/free-solid-svg-icons';
