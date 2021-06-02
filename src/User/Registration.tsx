@@ -1,152 +1,88 @@
 import react, { useState } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
+import '../Styleguide.css';
 
 export default function RegistrationForm() {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
-    const [password, setPassword1] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
 
     function DisplayForm() {
-        if (login) {
-            return (
-                <Form.Group>
-                    <div>
-                        <Form.Label>
-                            Gebruikersnaam
-                </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
-                                type="text"
-                                value={username}
-                                onChange={(e) => {
-                                    setUsername(e.target.value)
-                                }}
-                                required
-                            />
-                        </InputGroup>
-                    </div>
-                    <div>
-                        <Form.Label>
-                            Wachtwoord
-                </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={(e) => {
-                                    setPassword1(e.target.value)
-                                }}
-                                required
-                            />
-                        </InputGroup>
-                    </div>
-                </Form.Group>
-            )
-        } else {
-            return (
-                <Form.Group>
-                    <div>
-                        <Form.Label>
-                            Gebruikersnaam
-            </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
-                                type="text"
-                                value={username}
-                                onChange={(e) => {
-                                    setUsername(e.target.value)
-                                }}
-                                required
-                            />
-                        </InputGroup>
-                    </div>
-                    <div>
-                        <Form.Label>
-                            Email
-            </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
-                                type="email"
-                                value={email}
-                                onChange={(e) => {
-                                    setEmail(e.target.value)
-                                }}
-                                required
-                            />
-                        </InputGroup>
-                    </div>
-                    <div>
-                        <Form.Label>
-                            Wachtwoord
-            </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
-                                type="text"
-                                value={password}
-                                onChange={(e) => {
-                                    setPassword1(e.target.value)
-                                }}
-                                required
-                            />
-                        </InputGroup>
-                    </div>
-                    <div>
-                        <Form.Label>
-                            Wachtwoord Bevestigen
-            </Form.Label>
-                    </div>
-                    <div>
-                        <InputGroup>
-                            <Form.Control
+        return (
+            <Form.Group>
+                <div className="element">
+                    <label className="formLabel">gebruikersnaam
+                    <input
+                            type="text"
+                            value={username}
+                            onChange={(e) => {
+                                setUsername(e.target.value)
+                            }}
+                            required />
+                    </label>
+                </div>
+                <div className="element">
+                    <label className="formLabel">wachtwoord
+                    <input
+                            type="text"
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                            }}
+                            required />
+                    </label>
+                </div>
+                {login ? null : <>
+                    <div className="element">
+                        <label className="formLabel">password check
+                    <input
                                 type="text"
                                 value={password2}
                                 onChange={(e) => {
                                     setPassword2(e.target.value)
                                 }}
-                                required
-                            />
-                        </InputGroup>
+                                required />
+                        </label>
                     </div>
-                </Form.Group>
-            )
-        }
+                    <div className="element">
+                        <label className="formLabel">email
+                    <input
+                                type="text"
+                                value={email}
+                                onChange={(e) => {
+                                    setEmail(e.target.value)
+                                }}
+                                required />
+                        </label>
+                    </div>
+                </>}
+            </Form.Group>
+        )
     }
-
     function DisplayButtons() {
-        if (login) {
-            return (
-                <>
-                    <div>
-                        <Button type="submit">Log-In</Button>
-                    </div>
-                    <div>
-                        <a onClick={(e) => {
-                            setLogin(false)
-                        }}> Not A User Yet?</a>
-                    </div>
-                </>
-            )
-        } else {
-            return (
+        return login ? (
+            <>
+                <button className="btnSmall btnNormal">Inloggen</button>
                 <div>
-                    <Button type="submit">Register</Button>
+                    <a className="hyperLink"
+                    onClick={(e) => {
+                        setLogin(false)
+                    }}>Nog geen gebruiker?</a>
                 </div>
-            )
-        }
+            </>)
+            : <>
+            <button className="btnSmall btnNormal">Registreer</button>
+            <div>
+                    <a className="hyperLink"
+                    onClick={(e) => {
+                        setLogin(true)
+                    }}>Heeft u al een account?</a>
+                </div>
+            </>
     }
     return (
         <Form onSubmit={(e) => {

@@ -56,6 +56,7 @@ h6 {
 .hyperLink {
     text-decoration: underline;
     font-weight: bold;
+    cursor: pointer;
 }
 ul {
     list-style: circle;
@@ -429,4 +430,51 @@ like a tickmark */
 .tableDangerIcon {
     margin-left: 5px;
     margin-right:5px;
+}
+/*INFOBOX*/
+.infoElement {
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    border:2px solid #313131;
+    border-radius: 10px;
+    margin: 20px 0 20px 0;
+}
+.infoBox {
+    position:relative;
+    margin:5px;
+    width: 600px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: top;
+}
+.infoBox h3, .infoBox h5{
+    padding-left: 10px;
+}
+.infoTop {
+    position: relative;
+    border-bottom:1px solid #313131;
+    margin-left:-5px;
+    width:102%;
+    display: flex;
+    flex-direction: row;
+}
+.infoTop div {
+    display: flex;
+    flex-direction: row;
+}
+.infoMid {
+    position: relative;
+    margin:10px 0 10px 0;
+    border-bottom:1px solid #313131;
+    margin-left:-5px;
+    width:102%;
+}
+.infoBottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
 }

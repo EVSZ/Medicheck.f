@@ -14,8 +14,8 @@ export default function NavigationBar() {
                 <Link to="/"><a href="#Home">Home</a></Link>
                 <Link to="/Advice"><a href="#Advice">Advice</a></Link>
                 <Link to="/Personal"><a href="#User">Personal</a></Link>
-            </ul>
                 <Link to="/Registration"><Button variant="danger">Login</Button></Link>
+            </ul>
         </nav>
      );
 }
