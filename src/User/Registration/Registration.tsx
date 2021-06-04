@@ -35,6 +35,7 @@ export default function RegistrationForm(props:any) {
                                     setUsername(e.target.value)
                                 }}
                                 required
+                                className="action-username"
                             />
                         </InputGroup>
                     </div>
@@ -52,6 +53,7 @@ export default function RegistrationForm(props:any) {
                                     setPassword1(e.target.value)
                                 }}
                                 required
+                                className="action-password"
                             />
                         </InputGroup>
                     </div>
@@ -74,6 +76,7 @@ export default function RegistrationForm(props:any) {
                                     setUsername(e.target.value)
                                 }}
                                 required
+                                className="action-username"
                             />
                         </InputGroup>
                     </div>
@@ -91,6 +94,7 @@ export default function RegistrationForm(props:any) {
                                     setEmail(e.target.value)
                                 }}
                                 required
+                                className="action-email"
                             />
                         </InputGroup>
                     </div>
@@ -108,6 +112,7 @@ export default function RegistrationForm(props:any) {
                                     setPassword1(e.target.value)
                                 }}
                                 required
+                                className="action-password1"
                             />
                         </InputGroup>
                     </div>
@@ -125,6 +130,7 @@ export default function RegistrationForm(props:any) {
                                     setPassword2(e.target.value)
                                 }}
                                 required
+                                className="action-password2"
                             />
                         </InputGroup>
                     </div>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="344768b6-bd62-446e-b238-20a3f789dce8" name="Default Changelist" comment="" />
+    <list default="true" id="344768b6-bd62-446e-b238-20a3f789dce8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cypress/integration/examples/actions.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/examples/actions.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User/Registration/Registration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/User/Registration/Registration.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +42,10 @@
       <option name="presentableId" value="Default" />
       <updated>1619006837220</updated>
       <workItem from="1619006841012" duration="1494000" />
+      <workItem from="1622800073458" duration="274000" />
+      <workItem from="1622800531767" duration="29000" />
+      <workItem from="1622804321062" duration="613000" />
+      <workItem from="1622808287450" duration="11000" />
     </task>
     <servers />
   </component>
