@@ -396,41 +396,41 @@ like a tickmark */
     background-color: #414042;
 }
 /*TABLE*/
-.table {
-    margin-top: 5px;
-    border:1px solid grey;
+.Table {
+    border:1px solid #313131;
+    margin-bottom: 25px;
 }
-.table td { 
-    border-top: 1px solid grey;
+.Table td { 
+    border-top: 1px solid #313131;
     padding: 8px;
     min-height:45px;
 }
-.table tr:nth-child(even) {
+.Table tr:nth-child(even) {
     background-color: #f5f5f6;
 }
-.table tr:hover {
+.Table tr:hover {
     background-color:#e3ecf4;
 }
-.table tr:active {
+.Table tr:active {
     background: color #b7cee3;;
 }
-.table th {
-    padding-left: px;
+.Table th {
+    padding: 10px;
     font-size: 18px;
     font-weight:400;
     align-items: center;
     background-color: #F7F7F7;
 }
-.table .scary {
+.Table .scary {
     border: 2px solid red;
     color:#C1272D;
 }
-.table tr td .tblLabelContainer {
+.Table tr td .tblLabelContainer {
     display: flex;
     flex-direction: row;
     margin-left: -5px;
 }
-.table tr td .customLabel#danger {
+.Table tr td .customLabel#danger {
     min-width: 25px;
     max-width: 40px;
     margin-left: 5px;

@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Styleguide.css';
 import HealthInfo from './User/Health'
 import GetAdvice from './Advice/GetAdvice'
+import DisplayMedication from './Medication/DisplayMedication'
 library.add(fas);
 
 function App() {
@@ -29,17 +30,22 @@ function App() {
             <Registration />
           </Route>
           <Route path="/Advice">
-            <GetAdvice/>
-            <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
-            {/* <MedicationList />
+              <div>
+                <GetAdvice />
+                <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
+                <HealthInfo />
+              </div>
+              <div className="right">
+                <DisplayMedication />
+              </div>
+              {/* <MedicationList />
             <AdviceGenerator /> */}
-            <HealthInfo/>
           </Route>
         </Switch>
       </div>
     </Router>
     // <div className="App">
-        //   <Styleguidetest />
+    //   <Styleguidetest />
     // </div>
   );
 }

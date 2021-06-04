@@ -13,9 +13,11 @@
 .App {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
   padding: 15px;
   background-color:#F7F7F7;
+}
+.right {
+  margin-left: 20px;
 }
