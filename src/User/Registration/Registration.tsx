@@ -172,12 +172,7 @@ export default function RegistrationForm(props:any) {
                         console.log(res.data);
 
                         if (res.data != ""){
-                            setEmail(String(res.data.EmailAddress));
-                            setName(String(res.data.name));
-                            setBirthDate(String(res.data.birthDate));
-                            setGender(String(res.data.gender));
-                            setWeight(String(res.data.healthInfo.weight));
-                            setLength(String(res.data.healthInfo.length));
+                            setUsername(res.data);
     
                             setLoggedIn("Succesvol ingelogd");
                             
