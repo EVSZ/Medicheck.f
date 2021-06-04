@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
 import NavigationBar from './NavBar/NavigationBar';
-import UserPForm from './UserPForm';
+import UserPForm from '../src/User/UserPForm';
 import MedicationList from './Medication/MedicationList';
 import AdviceGenerator from './Advice/GenerateAdvice'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Result from './Advice/GetResultAdvice';
 import Registration from './User/Registration'
-import Profile from './User/Profile';
 import Styleguidetest from './Styleguidetest';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Styleguide.css';
-
+import HealthInfo from './User/Health'
+import GetAdvice from './Advice/GetAdvice'
 library.add(fas);
 
 function App() {
@@ -29,12 +29,11 @@ function App() {
             <Registration />
           </Route>
           <Route path="/Advice">
+            <GetAdvice/>
             <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
-            <MedicationList />
-            <AdviceGenerator />
-          </Route>
-          <Route path="/Personal">
-            <Profile />
+            {/* <MedicationList />
+            <AdviceGenerator /> */}
+            <HealthInfo/>
           </Route>
         </Switch>
       </div>

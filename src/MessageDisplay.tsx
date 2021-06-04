@@ -1,3 +1,4 @@
+export {} 
 {/* <div className="infoElement"> 
           <div className="infoBox">
             <div className="infoTop">

@@ -2,6 +2,7 @@ import react, { useState } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 import '../Styleguide.css';
+import './Registration.css'
 
 export default function RegistrationForm() {
 
@@ -13,7 +14,7 @@ export default function RegistrationForm() {
 
     function DisplayForm() {
         return (
-            <Form.Group>
+            <Form.Group className="mainForm">
                 <div className="element">
                     <label className="formLabel">gebruikersnaam
                     <input
