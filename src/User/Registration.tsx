@@ -3,6 +3,7 @@ import { Form, InputGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
 import '../Styleguide.css';
 import './Registration.css'
+import {Link} from 'react-router-dom';
 
 export default function RegistrationForm() {
 
@@ -29,7 +30,7 @@ export default function RegistrationForm() {
                 <div className="element">
                     <label className="formLabel">wachtwoord
                     <input
-                            type="text"
+                            type="password"
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value)
@@ -101,6 +102,7 @@ export default function RegistrationForm() {
                             console.log(res);
                             console.log(res.data);
                         })
+                    setLogin(true);
                 } else {
                     console.log("jammer man")
                 }
