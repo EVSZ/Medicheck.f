@@ -18,7 +18,7 @@ export default function HealthInfo() {
                     <input type="date" />
                     </label>
                 </div>
-                <div className="element">
+                {/* <div className="element">
                     <label className="formLabel">Bloeddruk HOOG
                     <input type="number" min="0" />
                     </label>
@@ -27,10 +27,7 @@ export default function HealthInfo() {
                     <label className="formLabel">Bloeddruk LAAG
                     <input type="number" min="0" />
                     </label>
-                </div>
-                <div className="element">
-                    <button className="btnSmall btnNormal" type="submit">Sla gegevens op</button>
-                </div>
+                </div> */}
             </div>
     )
 }

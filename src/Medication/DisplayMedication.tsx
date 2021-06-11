@@ -93,13 +93,21 @@ export default function DisplayMedication() {
         );
         return medlist;
     }
+
+    function saveMedlist() {
+        if (addedMedList.length == 0){ alert("Vul eerst uw medicatielijst") }
+        else{
+            
+        }
+    }
+    
     return (
         <div className="DisplayMedContainer">
              <div className="element">
                 <label className="formLabel">Search
                 <div className="customTextBox">
                         <FontAwesomeIcon className="textBoxIcon" icon={["fas", "search"]} onClick={searchClick} />
-                        <input type="text" onChange={(e) => {setInput(e.target.value)}} />
+                        <input type="text" placeholder="Zoek medicatie bij naam" onChange={(e) => {setInput(e.target.value)}} />
                     </div>
                 </label>
             </div>
@@ -137,6 +145,9 @@ export default function DisplayMedication() {
                     </tr>
                     {returnMedList(addedMedList)}
                 </table>
+            </div>
+            <div className="element">
+                <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
             </div>
         </div>
     )

@@ -5,7 +5,7 @@ import './UserPForm.css'
 import axios from 'axios';
 import { Medication } from '../Medication/MedicationList';
 
-export interface Patient {
+export interface IPatient {
     name: string;
     height: number;
     weight: number;
@@ -15,7 +15,7 @@ export interface Patient {
     MedList: Medication[] | null;
 }
 
-export default function UserPForm({ properties }: { properties: Patient }) {
+function UserPForm({ properties }: { properties: IPatient }) {
     const [name, setName] = useState<string>(properties.name);
     const [height, setHeight] = useState<number>(properties.height);
     const [weight, setWeight] = useState<number>(properties.weight);
@@ -23,7 +23,7 @@ export default function UserPForm({ properties }: { properties: Patient }) {
     const [gender, setGender] = useState<String>(properties.gender);
     const [pregnant, setPreg] = useState<boolean>(false);
 
-    const [patient] = useState<Patient>();
+    const [patient] = useState<IPatient>();
 
     function showPregnant(): JSX.Element {
         let checkbox: JSX.Element;
@@ -135,11 +135,8 @@ export default function UserPForm({ properties }: { properties: Patient }) {
                     </label>
                 </div>
             </div>
-            <div className="UserPFormGroup">
-                <Form.Group>
-                    <button className="btnSmall btnNormal" type="submit">Sla gegevens op</button>
-                </Form.Group>
-            </div>
         </Form >
     );
 }
+
+export default UserPForm;
