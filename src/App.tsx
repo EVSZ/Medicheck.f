@@ -44,7 +44,7 @@ function App() {
         <NavigationBar />
         <Switch>
           <Route path="/">
-            {cookie === "" ?
+            {localStorage.getItem("loggedUser") === null ?
               <div>
                 <Registration cookie={setCookie}/>
               </div> :

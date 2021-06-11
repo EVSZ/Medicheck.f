@@ -128,10 +128,12 @@ export default function RegistrationForm({cookie}: {cookie:React.Dispatch<React.
                     .then(res => {
                         console.log(res)
                         console.log(res.data)
-                        console.log(GetCookie("JSESSIONID"))
+                        setUsername(res.data.username)
                     })
                 try {
+                    localStorage.setItem("loggedUser", username)
                     setLoginsuccess(true);
+                    window.location.reload()
                 }
                 catch (err) {
 

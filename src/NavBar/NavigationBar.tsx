@@ -17,6 +17,16 @@ export default function NavigationBar() {
                 <div className="Logo">
                     <img src={LOGO} alt="error" />
                 </div>
+                {localStorage.getItem("loggedUser") === null ? null
+                    :
+                    <div className="LoginButton">
+                        <button id="userLogin" className="btnImageOutline"
+                            onClick={() => {
+                                localStorage.removeItem("loggedUser")
+                                window.location.reload()
+                            }}>Log Out</button>
+                    </div>}
+
                 {/* <div className="LoginButton">
                     <Link to="/Registration">
                         <button id="userLogin" className="btnImageOutline"><FontAwesomeIcon style={{ width: "75px", height: "75px" }} icon={["fas", "user"]} /></button>
