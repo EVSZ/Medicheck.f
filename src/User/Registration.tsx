@@ -5,9 +5,8 @@ import '../Styleguide.css';
 import './Registration.css'
 import { Link } from 'react-router-dom';
 import UserPForm from "./UserPForm";
-import { Patient } from "./UserPForm";
 
-export default function RegistrationForm({cookie}: {cookie:React.Dispatch<React.SetStateAction<string>>}) {
+export default function RegistrationForm() {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
@@ -15,8 +14,6 @@ export default function RegistrationForm({cookie}: {cookie:React.Dispatch<React.
     const [password, setPassword] = useState<string>("");
     const [password2, setPassword2] = useState<string>("");
     const [loginsuccess, setLoginsuccess] = useState<boolean>(false)
-    const [Patient, setPatient] = useState<Patient>()
-
 
     function DisplayForm() {
         return (
@@ -96,7 +93,8 @@ export default function RegistrationForm({cookie}: {cookie:React.Dispatch<React.
         axios.get('http://localhost:8080/api/patienten/get')
             .then((resp: AxiosResponse<any>) => {
                 let res = resp.data;
-                setPatient(JSON.parse(JSON.stringify(resp.data)))
+                //IMPLEMENT, Retrieve patient from DB and set to properties
+                // setPatient(JSON.parse(JSON.stringify(resp.data)))
             });
     }
     function DisplayButtons() {
