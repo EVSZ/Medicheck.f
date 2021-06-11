@@ -12,7 +12,7 @@ export interface Medication {
     GetCurrentMedicationList: () => Medication[];
 }
 
-interface userPrescriptions{medicines: Medication};
+interface userPrescriptions{medicine: Medication};
 
 interface iMeds {
     ups: userPrescriptions[];
@@ -48,13 +48,13 @@ export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
 
     const addClick=(index: number) => {
         addedMedList.push(searchedMed[index]);
-        const userPrescription: userPrescriptions = {medicines: searchedMed[index]};
+        const userPrescription: userPrescriptions = {medicine: searchedMed[index]};
         iMeds.ups.push(userPrescription);
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
-        const userPrescription: userPrescriptions = {medicines: searchedMed[index]};
+        const userPrescription: userPrescriptions = {medicine: searchedMed[index]};
         iMeds.ups.push(userPrescription);
     }
 

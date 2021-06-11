@@ -6,8 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-    patient={{birhtDate:"22/10/2018", gender:0, healthInformation:{clcr:0, lastclcr:"22/12/2010"}, userPrescriptions: [], height: 120, id: 2, name:"MotherCucker", pregnant:false, weight:2000}}/>
+    <App patient={{id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '18-06-2002', gender: 0, healthInformation: {clcr: 69, lastclcr: '04-055-2015'}, userPrescriptions: []}} />
   </React.StrictMode>,
   document.getElementById('root')
 );

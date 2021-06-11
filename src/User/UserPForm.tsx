@@ -10,9 +10,9 @@ interface iName {
     setName: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface iHeight {
-    height: number
-    setHeight: React.Dispatch<React.SetStateAction<number>>
+interface iLength {
+    length: number
+    setLength: React.Dispatch<React.SetStateAction<number>>
 }
 
 interface iWeight {
@@ -35,7 +35,7 @@ interface iPrego {
     setPrego: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function UserPForm({name, height, weight, age, gender, prego}:{name:iName, height:iHeight, weight:iWeight, age:iAge, gender:iGender, prego: iPrego}) {
+function UserPForm({name, length, weight, age, gender, prego}:{name:iName, length:iLength, weight:iWeight, age:iAge, gender:iGender, prego: iPrego}) {
 
     // const [patient] = useState<IPatient>();
 
@@ -65,7 +65,7 @@ function UserPForm({name, height, weight, age, gender, prego}:{name:iName, heigh
     return (
         <Form className="main" onSubmit={(e) => {
             e.preventDefault();
-            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, prego, age })
+            axios.post(`http://localhost:8080/api/patienten/post`, { name, length, weight, gender, prego, age })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
@@ -90,9 +90,9 @@ function UserPForm({name, height, weight, age, gender, prego}:{name:iName, heigh
                     <input type="number"
                             min="1"
                             step="1"
-                            value={height.height}
+                            value={length.length}
                             onChange={(e) => {
-                                height.setHeight(parseInt(e.target.value))
+                                length.setLength(parseInt(e.target.value))
                             }}
                             required />
                     </label>

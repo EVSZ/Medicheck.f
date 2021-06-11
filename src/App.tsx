@@ -15,15 +15,16 @@ import './Styleguide.css';
 import HealthInfo from './User/Health'
 import GetAdvice from './Advice/GetAdvice'
 import DisplayMedication from './Medication/DisplayMedication'
+import axios from 'axios';
 library.add(fas);
 
 export interface Patient{
   id: number;
   name: string;
   weight: number;
-  height: number;
+  length: number;
   pregnant: boolean;
-  birhtDate: string;
+  birthDate: string;
   gender: number;
   healthInformation: healthInformation;
   userPrescriptions: userPrescriptions[];
@@ -35,7 +36,7 @@ interface healthInformation{
 }
 
 interface userPrescriptions{
-  medicines: medicine;
+  medicine: medicine;
 }
 
 interface medicine {
@@ -51,9 +52,9 @@ function App({patient}: {patient:Patient}) {
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
   const [weight, setWeight] = useState<number>(patient.weight);
-  const [height, setHeight] = useState<number>(patient.height);
+  const [length, setLength] = useState<number>(patient.length);
   const [pregnant, setPregnant] = useState<boolean>(patient.pregnant);
-  const [birhtDate, setBirthDate] = useState<string>(patient.birhtDate);
+  const [birhtDate, setBirthDate] = useState<string>(patient.birthDate);
   const [gender, setGender] = useState<number>(patient.gender)
 
   const [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
@@ -64,7 +65,15 @@ function App({patient}: {patient:Patient}) {
   function saveMedlist() {
     if (patient.userPrescriptions.length == 0){ alert("Vul eerst uw medicatielijst") }
     else{
-        console.log(patient.userPrescriptions);
+        const payload = {patient};
+        console.log(payload);
+        axios.put('http://localhost:8080/api/patienten/update', payload)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
 }
 
@@ -85,7 +94,7 @@ function App({patient}: {patient:Patient}) {
                 <UserPForm 
                 age={{age: birhtDate, setAge:setBirthDate}} 
                 gender={{gender:gender, setGender:setGender}} 
-                height={{height:height, setHeight:setHeight}}
+                length={{length:length, setLength:setLength}}
                 name={{name: name, setName:setName}}
                 prego={{prego:pregnant, setPrego:setPregnant}}
                 weight={{weight:weight, setWeight:setWeight}}/>
