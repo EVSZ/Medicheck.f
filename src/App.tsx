@@ -37,7 +37,7 @@ function getCookie(cname: string) {
 
 function App() {
 
-    const [cookie, setCookie] = React.useState<string>(getCookie("JSESSIONID"))  
+    const [cookie, setCookie] = React.useState<string>("")  
     return (
     <Router>
       <div className="App">
@@ -46,7 +46,7 @@ function App() {
           <Route path="/">
             {cookie === "" ?
               <div>
-                <Registration />
+                <Registration cookie={setCookie}/>
               </div> :
               <div>
                 <div>

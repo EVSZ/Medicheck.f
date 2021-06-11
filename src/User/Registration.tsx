@@ -1,13 +1,13 @@
 import react, { useState } from 'react';
 import { Form, InputGroup, Button } from 'react-bootstrap';
-import axios, {AxiosResponse} from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import '../Styleguide.css';
 import './Registration.css'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserPForm from "./UserPForm";
-import {Patient} from "./UserPForm";
+import { Patient } from "./UserPForm";
 
-export default function RegistrationForm() {
+export default function RegistrationForm({cookie}: {cookie:React.Dispatch<React.SetStateAction<string>>}) {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
@@ -29,7 +29,7 @@ export default function RegistrationForm() {
                             onChange={(e) => {
                                 setUsername(e.target.value)
                             }}
-                            required/>
+                            required />
                     </label>
                 </div>
                 <div className="element">
@@ -40,7 +40,7 @@ export default function RegistrationForm() {
                             onChange={(e) => {
                                 setPassword(e.target.value)
                             }}
-                            required/>
+                            required />
                     </label>
                 </div>
                 {login ? null : <>
@@ -52,7 +52,7 @@ export default function RegistrationForm() {
                                 onChange={(e) => {
                                     setPassword2(e.target.value)
                                 }}
-                                required/>
+                                required />
                         </label>
                     </div>
                     <div className="element">
@@ -63,22 +63,22 @@ export default function RegistrationForm() {
                                 onChange={(e) => {
                                     setEmail(e.target.value)
                                 }}
-                                required/>
+                                required />
                         </label>
                     </div>
                 </>}
                 {loginsuccess ? true : <>
-                    <UserPForm properties={Patient}/>
+                    {/* <UserPForm properties={Patient} /> */}
                 </>}
             </Form.Group>
         )
     }
 
-    function GetCookie (cname:string) {
+    function GetCookie(cname: string) {
         var name = cname + "=";
         var decodedCookie = decodeURIComponent(document.cookie);
         var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
+        for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
             while (c.charAt(0) == ' ') {
                 c = c.substring(1);
@@ -90,33 +90,33 @@ export default function RegistrationForm() {
         return "";
     }
 
-    function GetPatient(){
+    function GetPatient() {
         let axios = require('axios');
 
         axios.get('http://localhost:8080/api/patienten/get')
-            .then((resp: AxiosResponse<any>) =>{
+            .then((resp: AxiosResponse<any>) => {
                 let res = resp.data;
-            setPatient(JSON.parse(JSON.stringify(resp.data)))
-        });
+                setPatient(JSON.parse(JSON.stringify(resp.data)))
+            });
     }
     function DisplayButtons() {
         return login ? (
-                <>
-                    <button className="btnSmall btnNormal">Inloggen</button>
-                    <div>
-                        <a className="hyperLink"
-                           onClick={(e) => {
-                               setLogin(false)
-                           }}>Nog geen gebruiker?</a>
-                    </div>
-                </>)
+            <>
+                <button className="btnSmall btnNormal">Inloggen</button>
+                <div>
+                    <a className="hyperLink"
+                        onClick={(e) => {
+                            setLogin(false)
+                        }}>Nog geen gebruiker?</a>
+                </div>
+            </>)
             : <>
                 <button className="btnSmall btnNormal">Registreer</button>
                 <div>
                     <a className="hyperLink"
-                       onClick={(e) => {
-                           setLogin(true)
-                       }}>Heeft u al een account?</a>
+                        onClick={(e) => {
+                            setLogin(true)
+                        }}>Heeft u al een account?</a>
                 </div>
             </>
     }
@@ -128,12 +128,12 @@ export default function RegistrationForm() {
                     .then(res => {
                         console.log(res)
                         console.log(res.data)
+                        console.log(GetCookie("JSESSIONID"))
                     })
-                try{
-                    GetCookie("JSESSIONID");
+                try {
                     setLoginsuccess(true);
                 }
-                catch(err){
+                catch (err) {
 
                 }
             } else {
