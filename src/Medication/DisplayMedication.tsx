@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './DisplayMedication.css'
+import { propTypes } from "react-bootstrap/esm/Image";
 
 export interface Medication {
     id: number;
@@ -11,7 +12,16 @@ export interface Medication {
     GetCurrentMedicationList: () => Medication[];
 }
 
-export default function DisplayMedication() {
+interface medication {
+    id: number;
+}
+
+interface iMeds {
+    addedMedlist: medication[];
+    setAddedMedlist: React.Dispatch<React.SetStateAction<medication[]>>
+}
+
+export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
     const [input, setInput] = useState<string>("");
     const [MedList, setMedlist] = useState<Medication[]>([]);
     const [searchedMed] = useState<Medication[]>([]);
@@ -39,11 +49,13 @@ export default function DisplayMedication() {
     }
 
     const addClick=(index: number) => {
-        addedMedList.push(searchedMed[index])
+        addedMedList.push(searchedMed[index]);
+        iMeds.setAddedMedlist(addedMedList);
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
+        iMeds.setAddedMedlist(addedMedList);
     }
 
     function returnSearchMedList(searchedMed: Medication[]) {
@@ -93,13 +105,6 @@ export default function DisplayMedication() {
         );
         return medlist;
     }
-
-    function saveMedlist() {
-        if (addedMedList.length == 0){ alert("Vul eerst uw medicatielijst") }
-        else{
-            
-        }
-    }
     
     return (
         <div className="DisplayMedContainer">
@@ -145,9 +150,6 @@ export default function DisplayMedication() {
                     </tr>
                     {returnMedList(addedMedList)}
                 </table>
-            </div>
-            <div className="element">
-                <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
             </div>
         </div>
     )
