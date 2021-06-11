@@ -8,17 +8,9 @@ interface healthInformation{
     setLastclcr: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface iClcr {
-    clcr: number
-    setClcr: React.Dispatch<React.SetStateAction<number>>
-}
 
-interface iLastclcr {
-    lastclcr: string
-    setLastclcr: React.Dispatch<React.SetStateAction<string>>
-}
 
-export default function HealthInfo({Clcr, Lastclcr}: {Clcr: iClcr, Lastclcr: iLastclcr}) {
+export default function HealthInfo({healthinformation}: {healthinformation: healthInformation}) {
 
     return (
             <div className="HealthInfoForm">
@@ -27,12 +19,12 @@ export default function HealthInfo({Clcr, Lastclcr}: {Clcr: iClcr, Lastclcr: iLa
                 </div>
                 <div className="element">
                     <label className="formLabel">ClCr Waarde
-                    <input type="number" min="0" onChange={(e) => {Clcr.setClcr(parseInt(e.target.value))}} />
+                    <input type="number" min="0" onChange={(e) => {healthinformation.setClcr(parseInt(e.target.value))}} />
                     </label>
                 </div>
                 <div className="element">
                     <label className="formLabel">ClCr Datum
-                    <input type="date" onChange={(e) => {Lastclcr.setLastclcr(e.target.value)}} />
+                    <input type="date" onChange={(e) => {healthinformation.setLastclcr(e.target.value)}} />
                     </label>
                 </div>
                 {/* <div className="element">

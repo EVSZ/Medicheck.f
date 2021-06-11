@@ -65,6 +65,7 @@ function App({patient}: {patient:patient}) {
   function saveMedlist() {
     if (patient.userPrescriptions.length == 0){ alert("Vul eerst uw medicatielijst") }
     else{
+      let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
         const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)
@@ -99,8 +100,8 @@ function App({patient}: {patient:patient}) {
                 prego={{prego:pregnant, setPrego:setPregnant}}
                 weight={{weight:weight, setWeight:setWeight}}/>
                 <HealthInfo 
-                Clcr={{clcr: clcr, setClcr: setClcr}}
-                Lastclcr={{lastclcr: lastclcr, setLastclcr: setLastclcr}} />
+                healthinformation ={{clcr: clcr, setClcr: setClcr, lastclcr: lastclcr, setLastclcr: setLastclcr}}
+             />
               </div>
               <div className="right">
                 <DisplayMedication
