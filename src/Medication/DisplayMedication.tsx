@@ -1,15 +1,105 @@
-import React from 'react'
+import React, { useState } from "react";
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './DisplayMedication.css'
 
+export interface Medication {
+    id: number;
+    name: string;
+    discription: string;
+    medicineType: number;
+    GetCurrentMedicationList: () => Medication[];
+}
+
 export default function DisplayMedication() {
+    const [input, setInput] = useState<string>("");
+    const [MedList, setMedlist] = useState<Medication[]>([]);
+    const [searchedMed] = useState<Medication[]>([]);
+    const [addedMedList] = useState<Medication[]>([]);
+
+    const GetMedlist = async () => {
+        axios.get('http://localhost:8080/api/medication/getAll')
+        .then((response) => {
+            setMedlist(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    const searchClick=() => {
+        GetMedlist();
+        searchedMed.splice(0, searchedMed.length);
+
+        MedList.forEach(element => {
+            if (element.name.includes(input.toLowerCase())){
+                searchedMed.push(element);
+            }
+        });
+    }
+
+    const addClick=(index: number) => {
+        addedMedList.push(searchedMed[index])
+    }
+
+    const removeClick=(index:number) => {
+        addedMedList.splice(index, 1);
+    }
+
+    function returnSearchMedList(searchedMed: Medication[]) {
+        let medlist = searchedMed.map((Medication, index) => 
+            <tr key={index}>
+                <td>
+                    {Medication.name}
+                    {/* <div className="tblLabelContainer">
+                        <label className="customLabel" id="danger">PM</label>
+                        <label className="customLabel" id="danger">PP</label>
+                    </div> */}
+                </td>
+                <td>
+                    <button className="btnSmall btnNormal" onClick={() => addClick(index)}>Voeg Toe</button>
+                    
+                </td>
+            </tr>
+        );
+        return medlist;
+    }
+    
+    function returnMedList(addedMedList: Medication[]) {
+        let medlist = addedMedList.map((Medication, index) =>
+            <tr key={index}>
+                {/* <td>
+                    <label className="customLabel" id="info">{Medication.medicineType}</label>
+                </td> */}
+                <td>
+                    {Medication.name}
+                    {/* <div className="tblLabelContainer">
+                        <label className="customLabel" id="danger">PM</label>
+                        <label className="customLabel" id="danger">PP</label>
+                    </div> */}
+                </td>
+                {/* <td>
+                    01-01-2029
+                </td> */}
+                <td>
+                    <label>
+                        {Medication.discription}
+                    </label>
+                </td>
+                <td>
+                    <button className="btnSmall btnDanger" onClick={() => removeClick(index)}>Verwijder</button>
+                </td>
+            </tr>
+        );
+        return medlist;
+    }
     return (
         <div className="DisplayMedContainer">
              <div className="element">
                 <label className="formLabel">Search
                 <div className="customTextBox">
-                        <FontAwesomeIcon className="textBoxIcon" icon={["fas", "search"]} />
-                        <input type="text" />
+                        <FontAwesomeIcon className="textBoxIcon" icon={["fas", "search"]} onClick={searchClick} />
+                        <input type="text" onChange={(e) => {setInput(e.target.value)}} />
                     </div>
                 </label>
             </div>
@@ -23,152 +113,29 @@ export default function DisplayMedication() {
                             Selectie
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            Heroine
-                            <div className="tblLabelContainer">
-                                <label className="customLabel" id="danger">PM</label>
-                                <label className="customLabel" id="danger">PP</label>
-                            </div>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnNormal">Voeg Toe</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            AWW YAH
-                            <div className="tblLabelContainer">
-                                <label className="customLabel" id="danger">LUL</label>
-                                <label className="customLabel" id="danger">PP</label>
-                                <label className="customLabel" id="danger">MONGO</label>
-                            </div>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnNormal">Voeg Toe</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Daddy juice
-                            <div className="tblLabelContainer">
-
-                            </div>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnNormal">Voeg Toe</button>
-                        </td>
-                    </tr>
+                    {returnSearchMedList(searchedMed)}
                 </table>
             </div>
             <div className="element">
                 <table className="Table">
                     <tr>
-                        <th>Status</th>
+                        {/* <th>Type</th> */}
                         <th>
                             <FontAwesomeIcon className="tableDangerIcon" color="#414042" icon={["fas", "capsules"]} />
                         Geneesmiddel
                         </th>
-                        <th>Dosering</th>
-                        <th>
+                        {/* <th>
                             Ontvangen op
                             <FontAwesomeIcon className="tableDangerIcon" color="#414042" icon={["fas", "sort"]} />
-                        </th>
-                        <th className="scary">
-                            <FontAwesomeIcon className="tableDangerIcon" color="red" icon={["fas", "exclamation-triangle"]} />
-                            Medicatie Bewakingssingalen
-                            </th>
+                        </th> */}
                         <th>
-
+                            {/* <FontAwesomeIcon className="tableDangerIcon" color="red" icon={["fas", "exclamation-triangle"]} /> */}
+                            Medicatie Description
+                        </th>
+                        <th>
                         </th>
                     </tr>
-                    <tr>
-                        <td>
-                            <label className="customLabel" id="info">In bestelling</label>
-                        </td>
-                        <td>
-                            Heroine
-                            <div className="tblLabelContainer">
-                                <label className="customLabel" id="danger">PM</label>
-                                <label className="customLabel" id="danger">PP</label>
-                            </div>
-                        </td>
-                        <td>
-                            2.1t/2
-                        </td>
-                        <td>
-                            01-01-2029
-                        </td>
-                        <td>
-                            <label>
-                                Contra-indicatie 044
-                            </label>
-                            <label>
-                                astma
-                            </label>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnDanger">Verwijder</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label className="customLabel" id="info">Klaarmaken</label>
-                        </td>
-                        <td>
-                            AWW YAH
-                            <div className="tblLabelContainer">
-                                <label className="customLabel" id="danger">LUL</label>
-                                <label className="customLabel" id="danger">PP</label>
-                                <label className="customLabel" id="danger">MONGO</label>
-                            </div>
-                        </td>
-                        <td>
-                            2.1t/2
-                        </td>
-                        <td>
-                            01-01-2029
-                        </td>
-                        <td>
-                            <label>
-                                Contra-indicatie 044
-                            </label>
-                            <label>
-                                astma
-                            </label>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnDanger">Verwijder</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label className="customLabel" id="info">Ontvangen</label>
-                        </td>
-                        <td>
-                            Daddy juice
-                            <div className="tblLabelContainer">
-
-                            </div>
-                        </td>
-                        <td>
-                            2.1t/2
-                        </td>
-                        <td>
-                            01-01-2029
-                        </td>
-                        <td>
-                            <label>
-                                Contra-indicatie 044
-                            </label>
-                            <label>
-                                astma
-                            </label>
-                        </td>
-                        <td>
-                            <button className="btnSmall btnDanger">Verwijder</button>
-                        </td>
-                    </tr>
+                    {returnMedList(addedMedList)}
                 </table>
             </div>
         </div>
