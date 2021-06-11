@@ -9,18 +9,16 @@ function  AdviceGenerator()
 {
     let AdviceResult:Boolean; 
 
-    
     function GenerateAdvice(): void {
         axios.get(`http://localhost:8080/algorithm/getAdvice`)
 
         .then((response) => {
-                alert(response.data);
+            alert(response.data);
         })
         .catch((error) => {
             console.log(error);
         })
-          
-      }
+    }
 
     return (
         <body >

@@ -5,31 +5,45 @@ import './UserPForm.css'
 import axios from 'axios';
 import { Medication } from '../Medication/MedicationList';
 
-export interface IPatient {
-    name: string;
-    height: number;
-    weight: number;
-    age?: string;
-    gender: String;
-    preg: boolean;
-    MedList: Medication[] | null;
+interface iName {
+    name: string
+    setName: React.Dispatch<React.SetStateAction<string>>
 }
 
-function UserPForm({ properties }: { properties: IPatient }) {
-    const [name, setName] = useState<string>(properties.name);
-    const [height, setHeight] = useState<number>(properties.height);
-    const [weight, setWeight] = useState<number>(properties.weight);
-    const [age, setAge] = useState<string | undefined>();
-    const [gender, setGender] = useState<String>(properties.gender);
-    const [pregnant, setPreg] = useState<boolean>(false);
+interface iHeight {
+    height: number
+    setHeight: React.Dispatch<React.SetStateAction<number>>
+}
 
-    const [patient] = useState<IPatient>();
+interface iWeight {
+    weight: number
+    setWeight: React.Dispatch<React.SetStateAction<number>>
+}
+
+interface iAge {
+    age: string
+    setAge: React.Dispatch<React.SetStateAction<string>>
+}
+
+interface iGender {
+    gender: number
+    setGender: React.Dispatch<React.SetStateAction<number>>
+}
+
+interface iPrego {
+    prego: boolean
+    setPrego: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function UserPForm({name, height, weight, age, gender, prego}:{name:iName, height:iHeight, weight:iWeight, age:iAge, gender:iGender, prego: iPrego}) {
+
+    // const [patient] = useState<IPatient>();
 
     function showPregnant(): JSX.Element {
         let checkbox: JSX.Element;
-        if (gender === "Male") {
+        if (gender.gender === 0) {
             checkbox = <div> </div>;
-        } else if (gender === "Female") {
+        } else if (gender.gender === 1) {
             checkbox = (<div className="UserPFormGroup">
                 <Form.Group>
                     <div className="UserPFormGrouplabel">
@@ -37,7 +51,7 @@ function UserPForm({ properties }: { properties: IPatient }) {
                     </div>
                     <div className="UserPFormGroupInput">
                         <input onSelect={() => {
-                            setPreg(true);
+                            prego.setPrego(true)
                         }} type="checkbox" />
                     </div>
                 </Form.Group>
@@ -51,7 +65,7 @@ function UserPForm({ properties }: { properties: IPatient }) {
     return (
         <Form className="main" onSubmit={(e) => {
             e.preventDefault();
-            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, pregnant, age })
+            axios.post(`http://localhost:8080/api/patienten/post`, { name, height, weight, gender, prego, age })
                 .then(res => {
                     console.log(res);
                     console.log(res.data);
@@ -62,9 +76,9 @@ function UserPForm({ properties }: { properties: IPatient }) {
                 <div className="element">
                     <label className="formLabel">Naam
                     <input type="text"
-                            value={name}
+                            value={name.name}
                             onChange={(e) => {
-                                setName(e.target.value)
+                                name.setName(e.target.value)
                             }}
                             required />
                     </label>
@@ -76,9 +90,9 @@ function UserPForm({ properties }: { properties: IPatient }) {
                     <input type="number"
                             min="1"
                             step="1"
-                            value={height}
+                            value={height.height}
                             onChange={(e) => {
-                                setHeight(parseInt(e.target.value))
+                                height.setHeight(parseInt(e.target.value))
                             }}
                             required />
                     </label>
@@ -90,9 +104,9 @@ function UserPForm({ properties }: { properties: IPatient }) {
                     <input type="number"
                             min="1"
                             step="1"
-                            value={weight}
+                            value={weight.weight}
                             onChange={(e) => {
-                                setWeight(parseInt(e.target.value))
+                                weight.setWeight(parseInt(e.target.value))
                             }}
                             required />
                     </label>
@@ -103,8 +117,8 @@ function UserPForm({ properties }: { properties: IPatient }) {
                     <label className="radioButton">Man
                 <input type="radio"
                             onChange={() => {
-                                setGender("Male");
-                                setPreg(false);
+                                gender.setGender(0)
+                                prego.setPrego(false)
                             }
                             } />
                         <span className="customRadio"></span>
@@ -115,8 +129,8 @@ function UserPForm({ properties }: { properties: IPatient }) {
                 <input type="radio"
                             name="formHorizontalRadios"
                             onChange={() => {
-                                setGender("Female");
-                                setPreg(false);
+                                gender.setGender(1)
+                                prego.setPrego(false)
                             }
                             } checked={true} />
                         <span className="customRadio"></span>
@@ -129,7 +143,7 @@ function UserPForm({ properties }: { properties: IPatient }) {
                     <label className="formLabel">Leeftijd
                     <input type="date"
                             onChange={(e) => {
-                                setAge(e.target.value)
+                                age.setAge(e.target.value)
                             }}
                             required />
                     </label>
