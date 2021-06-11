@@ -38,11 +38,15 @@ interface userPrescriptions{
   medicines: medicine[];
 }
 
-interface medicine{
+interface medicine {
   id: number;
+  name: string;
+  discription: string;
+  medicineType: number;
+  GetCurrentMedicationList: () => medicine[];
 }
 
-function App({medicine, patient}: {medicine:medicine, patient:Patient}) {
+function App({userPrescriptions, patient}: {userPrescriptions:userPrescriptions, patient:Patient}) {
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -56,7 +60,6 @@ function App({medicine, patient}: {medicine:medicine, patient:Patient}) {
   const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
 
   const [meds, setMeds] = useState<medicine[]>(patient.userPrescriptions.medicines);
-  // const [medId, setMedId] = useState<number[]>();
 
   function saveMedlist() {
     if (patient.userPrescriptions.medicines.length == 0){ alert("Vul eerst uw medicatielijst") }
