@@ -26,7 +26,7 @@ export interface Patient{
   birhtDate: string;
   gender: number;
   healthInformation: healthInformation;
-  userPrescriptions: userPrescriptions;
+  userPrescriptions: userPrescriptions[];
 }
 
 interface healthInformation{
@@ -35,7 +35,7 @@ interface healthInformation{
 }
 
 interface userPrescriptions{
-  medicines: medicine[];
+  medicines: medicine;
 }
 
 interface medicine {
@@ -46,7 +46,7 @@ interface medicine {
   GetCurrentMedicationList: () => medicine[];
 }
 
-function App({userPrescriptions, patient}: {userPrescriptions:userPrescriptions, patient:Patient}) {
+function App({patient}: {patient:Patient}) {
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -59,12 +59,12 @@ function App({userPrescriptions, patient}: {userPrescriptions:userPrescriptions,
   const [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
   const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
 
-  const [meds, setMeds] = useState<medicine[]>(patient.userPrescriptions.medicines);
+  const [up, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
   function saveMedlist() {
-    if (patient.userPrescriptions.medicines.length == 0){ alert("Vul eerst uw medicatielijst") }
+    if (patient.userPrescriptions.length == 0){ alert("Vul eerst uw medicatielijst") }
     else{
-        console.log(patient.userPrescriptions.medicines);
+        console.log(patient.userPrescriptions);
     }
 }
 
@@ -95,7 +95,7 @@ function App({userPrescriptions, patient}: {userPrescriptions:userPrescriptions,
               </div>
               <div className="right">
                 <DisplayMedication
-                iMeds={{addedMedlist: meds, setAddedMedlist: setMeds}} />
+                iMeds={{ups: up, setUps: setUp}} />
                 <div className="element">
                   <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
                 </div>

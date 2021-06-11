@@ -12,9 +12,11 @@ export interface Medication {
     GetCurrentMedicationList: () => Medication[];
 }
 
+interface userPrescriptions{medicines: Medication};
+
 interface iMeds {
-    addedMedlist: Medication[];
-    setAddedMedlist: React.Dispatch<React.SetStateAction<Medication[]>>
+    ups: userPrescriptions[];
+    setUps: React.Dispatch<React.SetStateAction<userPrescriptions[]>>
 }
 
 export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
@@ -46,12 +48,14 @@ export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
 
     const addClick=(index: number) => {
         addedMedList.push(searchedMed[index]);
-        iMeds.addedMedlist.push(searchedMed[index]);
+        const userPrescription: userPrescriptions = {medicines: searchedMed[index]};
+        iMeds.ups.push(userPrescription);
     }
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
-        iMeds.addedMedlist.push(searchedMed[index]);
+        const userPrescription: userPrescriptions = {medicines: searchedMed[index]};
+        iMeds.ups.push(userPrescription);
     }
 
     function returnSearchMedList(searchedMed: Medication[]) {
