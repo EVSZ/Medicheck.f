@@ -17,28 +17,49 @@ import GetAdvice from './Advice/GetAdvice'
 import DisplayMedication from './Medication/DisplayMedication'
 library.add(fas);
 
+function getCookie(cname: string) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  console.log(ca)
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      console.log(c)
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 function App() {
-  return (
+
+    const [cookie, setCookie] = React.useState<string>(getCookie("JSESSIONID"))  
+    return (
     <Router>
       <div className="App">
         <NavigationBar />
         <Switch>
-          <Route path="/Result">
-            <Result />
-          </Route>
-          <Route path="/Registration">
-            <Registration />
-          </Route>
-          <Route path="/Advice">
+          <Route path="/">
+            {cookie === "" ?
               <div>
-                <GetAdvice />
-                <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
-                <HealthInfo />
+                <Registration />
+              </div> :
+              <div>
+                <div>
+                  <GetAdvice />
+                  <UserPForm properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} />
+                  <HealthInfo />
+                </div>
+                <div className="right">
+                  <DisplayMedication />
+                </div>
               </div>
-              <div className="right">
-                <DisplayMedication />
-              </div>
-              {/* <MedicationList />
+            }
+            {/* <MedicationList />
             <AdviceGenerator /> */}
           </Route>
         </Switch>
