@@ -54,8 +54,7 @@ export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
 
     const removeClick=(index:number) => {
         addedMedList.splice(index, 1);
-        const userPrescription: userPrescriptions = {medicine: searchedMed[index]};
-        iMeds.ups.push(userPrescription);
+        iMeds.ups.splice(index, 1);
     }
 
     function returnSearchMedList(searchedMed: Medication[]) {
