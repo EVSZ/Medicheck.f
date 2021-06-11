@@ -1,6 +1,13 @@
 import React from 'react'
 import './Health.css'
 
+interface healthInformation{
+    clcr: number
+    setClcr: React.Dispatch<React.SetStateAction<number>>
+    lastclcr: string
+    setLastclcr: React.Dispatch<React.SetStateAction<string>>
+}
+
 interface iClcr {
     clcr: number
     setClcr: React.Dispatch<React.SetStateAction<number>>

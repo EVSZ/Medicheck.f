@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App patient={{id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '18-06-2002', gender: 0, healthInformation: {clcr: 69, lastclcr: '04-055-2015'}, userPrescriptions: []}} />
+    <App patient={{id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '2020-12-10', gender: 0, healthInformation: {clcr: 69, lastclcr: '2020-05-10'}, userPrescriptions: []}} />
   </React.StrictMode>,
   document.getElementById('root')
 );
@@ -15,3 +15,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+  

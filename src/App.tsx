@@ -18,7 +18,7 @@ import DisplayMedication from './Medication/DisplayMedication'
 import axios from 'axios';
 library.add(fas);
 
-export interface Patient{
+export interface patient{
   id: number;
   name: string;
   weight: number;
@@ -47,25 +47,25 @@ interface medicine {
   GetCurrentMedicationList: () => medicine[];
 }
 
-function App({patient}: {patient:Patient}) {
+function App({patient}: {patient:patient}) {
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
   const [weight, setWeight] = useState<number>(patient.weight);
   const [length, setLength] = useState<number>(patient.length);
   const [pregnant, setPregnant] = useState<boolean>(patient.pregnant);
-  const [birhtDate, setBirthDate] = useState<string>(patient.birthDate);
+  const [birthDate, setBirthDate] = useState<string>(patient.birthDate);
   const [gender, setGender] = useState<number>(patient.gender)
 
   const [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
   const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
-
-  const [up, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
+  const [healthInformation, setHealthinformation] = useState<healthInformation>(patient.healthInformation);
+  const [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
   function saveMedlist() {
     if (patient.userPrescriptions.length == 0){ alert("Vul eerst uw medicatielijst") }
     else{
-        const payload = {patient};
+        const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)
         .then(res => {
@@ -92,7 +92,7 @@ function App({patient}: {patient:Patient}) {
               <div>
                 <GetAdvice />
                 <UserPForm 
-                age={{age: birhtDate, setAge:setBirthDate}} 
+                age={{age: birthDate, setAge:setBirthDate}} 
                 gender={{gender:gender, setGender:setGender}} 
                 length={{length:length, setLength:setLength}}
                 name={{name: name, setName:setName}}
@@ -104,7 +104,7 @@ function App({patient}: {patient:Patient}) {
               </div>
               <div className="right">
                 <DisplayMedication
-                iMeds={{ups: up, setUps: setUp}} />
+                iMeds={{ups: userPrescriptions, setUps: setUp}} />
                 <div className="element">
                   <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
                 </div>
