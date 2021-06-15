@@ -5,7 +5,12 @@ import '../Styleguide.css';
 import './Registration.css'
 import {Link} from 'react-router-dom';
 
-export default function RegistrationForm() {
+interface iId{
+    id: number;
+    setId: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function RegistrationForm({iId, props}: {iId: iId, props: any}) {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
@@ -86,6 +91,7 @@ export default function RegistrationForm() {
                 </div>
             </>
     }
+
     return (
         <Form onSubmit={(e) => {
             e.preventDefault();
@@ -93,20 +99,21 @@ export default function RegistrationForm() {
                 const payload = { username, password };
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
-                        
+                        iId.setId(res.data);
+                        props();
+                        window.location.href = 'http://localhost:3000/Advice';
                     })
                     .catch(() => {
-                        alert("Er is iets mis gegaan...");
+                        alert("Uw inloggegevens waren incorrect");
                     })
             } else {
                 if (password === password2) {
                     const payload = { username, email, password };
                     axios.post(`http://localhost:8080/api/register/post/accountInfo`, payload)
                         .then(res => {
-                            
-                        })
-                        .catch(() => {
-                            alert("Er is iets mis gegaan...");
+                            iId.setId(res.data);
+                            props();
+                            window.location.href = 'http://localhost:3000/Advice';
                         })
                     setLogin(true);
                 } else {

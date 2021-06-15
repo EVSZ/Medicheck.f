@@ -15,7 +15,7 @@ export default function NavigationBar() {
         <nav className="mainContainer">
             <div className="content">
                 <div className="Logo">
-                    <Link to="/Advice"><img src={LOGO} alt="error" /></Link>
+                    <img src={LOGO} alt="error" />
                 </div>
                 <div className="LoginButton">
                     <Link to="/Registration">

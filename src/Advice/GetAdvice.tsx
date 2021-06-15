@@ -5,7 +5,7 @@ import './GetAdvice.css'
 export default function GetAdvice() {
 
     function AdviceCall(){
-        axios.get('http://localhost:8080/api/getAdvice')
+        axios.get('http://localhost:8080/algorithm/getAdvice')
         .then((res) => {
             console.log(res.data);
         })

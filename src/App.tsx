@@ -47,7 +47,8 @@ interface medicine {
   GetCurrentMedicationList: () => medicine[];
 }
 
-function App({patient}: {patient:patient}) {
+function App() {
+  const [patient, setPatient] = useState<patient>({id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '2020-12-10', gender: 0, healthInformation: {clcr: 69, lastclcr: '2020-05-10'}, userPrescriptions: []});
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -59,7 +60,6 @@ function App({patient}: {patient:patient}) {
 
   const [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
   const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
-  const [healthInformation, setHealthinformation] = useState<healthInformation>(patient.healthInformation);
   const [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
   function saveMedlist() {
@@ -70,12 +70,22 @@ function App({patient}: {patient:patient}) {
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)
         .then(res => {
-          console.log(res.data);
+          alert('Uw gegevens zijn opgeslagen!');
         })
         .catch(error => {
-          console.log(error);
+          alert('We konden op dit moment uw gegevens niet opslaan...');
         })
     }
+}
+
+function load() {
+  const payload = { id };
+  axios.post('http://localhost:8080/api/patienten/patient', payload)
+  .then(res => {
+    setPatient(res.data);
+    console.log(res.data);
+    console.log(patient);
+  })
 }
 
   return (
@@ -87,12 +97,14 @@ function App({patient}: {patient:patient}) {
             <Result />
           </Route>
           <Route path="/Registration">
-            <Registration />
+            <Registration 
+            iId={{id: id, setId: setId}}
+            props={load} />
           </Route>
           <Route path="/Advice">
               <div>
                 <GetAdvice />
-                <UserPForm 
+                <UserPForm
                 age={{age: birthDate, setAge:setBirthDate}} 
                 gender={{gender:gender, setGender:setGender}} 
                 length={{length:length, setLength:setLength}}
