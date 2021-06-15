@@ -40,7 +40,7 @@ export default function RegistrationForm() {
                 </div>
                 {login ? null : <>
                     <div className="element">
-                        <label className="formLabel">password check
+                        <label className="formLabel">wachtwoord opnieuw
                     <input
                                 type="text"
                                 value={password2}
@@ -90,21 +90,27 @@ export default function RegistrationForm() {
         <Form onSubmit={(e) => {
             e.preventDefault();
             if (login) {
-                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, { username, password })
+                const payload = { username, password };
+                axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
-                        console.log(res)
-                        console.log(res.data)
+                        
+                    })
+                    .catch(() => {
+                        alert("Er is iets mis gegaan...");
                     })
             } else {
                 if (password === password2) {
-                    axios.post(`http://localhost:8080/api/register/post/accountInfo`, { username, email, password })
+                    const payload = { username, email, password };
+                    axios.post(`http://localhost:8080/api/register/post/accountInfo`, payload)
                         .then(res => {
-                            console.log(res);
-                            console.log(res.data);
+                            
+                        })
+                        .catch(() => {
+                            alert("Er is iets mis gegaan...");
                         })
                     setLogin(true);
                 } else {
-                    console.log("jammer man")
+                    alert("Uw wachtwoorden komen niet met elkaar overeen");
                 }
             }
         }}>
