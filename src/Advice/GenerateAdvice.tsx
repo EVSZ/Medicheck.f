@@ -10,7 +10,7 @@ function  AdviceGenerator()
     let AdviceResult:Boolean; 
 
     function GenerateAdvice(): void {
-        axios.get(`http://localhost:8080/algorithm/getAdvice`)
+        axios.get(`http://localhost:8080/algorithm/getAdvice` + localStorage.getItem('userId'))
 
         .then((response) => {
             alert(response.data);
