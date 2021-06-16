@@ -3,16 +3,26 @@ import axios from 'axios';
 import Medication from '../Medication/MedicationList';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
 
 
 function  AdviceGenerator()
 {
-    function GenerateAdvice(): void {
-      }
+    let AdviceResult:Boolean; 
+
+    function GenerateAdvice() {
+        axios.post(`http://localhost:8080/algorithm/getAdvice/` + localStorage.getItem('userId'))
+
+        .then((response) => {
+            alert(response.data);
+        })
+        .catch((error) => {
+            
+        })
+    }
 
     return (
         <body >
+            <button className="GenerateAdvice" onClick={GenerateAdvice}><Link to="/Result"></Link></button>
         </body>
     );
 }

@@ -5,8 +5,6 @@ import axios from 'axios';
 export interface Medication {
     id: number;
     name: string;
-    hasRule: boolean;
-    ruleID: number;
     Description: string;
     medicineType: number;
     GetCurrentMedicationList: () => Medication[];
@@ -14,12 +12,12 @@ export interface Medication {
 
 function MedicationList() {
 
-    const [input, setInput] = useState<string>("");
-    const [MedList, setMedlist] = useState<Medication[]>([]);
-    const [searchedMed] = useState<Medication[]>([]);
-    const [addedMedList] = useState<Medication[]>([]);
+    let [input, setInput] = useState<string>("");
+    let [MedList, setMedlist] = useState<Medication[]>([]);
+    let [searchedMed] = useState<Medication[]>([]);
+    let [addedMedList] = useState<Medication[]>([]);
 
-    const GetMedlist = async () => {
+    let GetMedlist = async () => {
         axios.get('http://localhost:8080/api/medication/getAll')
         .then((response) => {
             setMedlist(response.data);
@@ -29,32 +27,7 @@ function MedicationList() {
         })
     }
 
-    const [adviceResult, setAdviceResult] = useState<Boolean>();
-    const [finalAdvice, setFinalAdvice] = useState<String>("");
-    
-    //test
-    function GenerateAdvice(): void {
-        let data = addedMedList;
-        let json = JSON.stringify(data);
-        console.log(data);
-        axios.post(`http://localhost:8080/algorithm/getAdvice`, addedMedList)
-    
-        .then((response) => {
-            console.log(response.data);
-            setAdviceResult(response.data);
-    
-            addedMedList.splice(0, addedMedList.length);
-
-            if (adviceResult) setFinalAdvice("U hoeft geen contact op te nemen met een dokter.");
-            else setFinalAdvice("Het is verstandig om contact op te nemen met een dokter.");
-        })
-        .catch((error) => {
-            console.log(error);
-            setFinalAdvice("Er lijkt is iets mis gegaan. We konden op dit moment geen advies genereren, onze excuses.");
-        })
-    }
-
-    const searchClick=() => {
+    let searchClick=() => {
         GetMedlist();
         searchedMed.splice(0, searchedMed.length);
 
@@ -65,11 +38,11 @@ function MedicationList() {
         });
     }
 
-    const addClick=(index: number) => {
+    let addClick=(index: number) => {
         addedMedList.push(searchedMed[index])
     }
 
-    const removeClick=(index:number) => {
+    let removeClick=(index:number) => {
         addedMedList.splice(index, 1);
     }
 
@@ -77,7 +50,7 @@ function MedicationList() {
         let medlist = searchedMed.map((Medication, index) => 
             <div key={index}>
                 <li>{Medication.name}</li>
-                <button onClick={() => addClick(index)}>VoegToe</button>
+                <button onMouseUp={() => addClick(index)}>VoegToe</button>
             </div>
         );
         return medlist;
@@ -87,7 +60,7 @@ function MedicationList() {
         let medlist = addedMedList.map((Medication, index) => 
             <div key={index}>
                 <li>{Medication.name}</li>
-                <button onClick={() => removeClick(index)}>Verwijder</button>
+                <button onMouseUp={() => removeClick(index)}>Verwijder</button>
             </div>
         );
         return medlist;
@@ -101,7 +74,7 @@ function MedicationList() {
                 <input type="text" value={input} placeholder="Zoek medicatie" onChange={(e) => {setInput(e.target.value)}} />
             </div>
             <div>
-                <button onClick={searchClick}>Zoek</button>
+                <button onMouseUp={searchClick}>Zoek</button>
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>
@@ -110,12 +83,6 @@ function MedicationList() {
             <div>
                 <h5>Uw toegevoegde medicatie:</h5>
                 {returnMedList(addedMedList)}
-            </div>
-            <div>
-                <button onClick={GenerateAdvice}>Genereer advies</button>
-                <div>
-                    {finalAdvice}
-                </div>
             </div>
         </div>
     );
