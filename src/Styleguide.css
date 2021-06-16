@@ -319,7 +319,7 @@ like a tickmark */
 /* .formLabel input[type=text]:focus:active, .formLabel input[type=text]:active {
     border-color: orange;
 } */
-.formLabel input[type=text], .formLabel input[type=number], .formLabel input[type=date] {
+.formLabel input[type=text], .formLabel input[type=number], .formLabel input[type=date], .formLabel input[type=password]{
     left:10px;
     font-size:16px;
     font-weight: 600;

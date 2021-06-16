@@ -99,7 +99,6 @@ function load() {
           </Route>
           <Route path="/Registration">
             <Registration 
-            iId={{id: id, setId: setId}}
             props={load} />
           </Route>
           <Route path="/Advice">

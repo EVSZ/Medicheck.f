@@ -5,12 +5,7 @@ import '../Styleguide.css';
 import './Registration.css'
 import {Link} from 'react-router-dom';
 
-interface iId{
-    id: number;
-    setId: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export default function RegistrationForm({iId, props}: {iId: iId, props: any}) {
+export default function RegistrationForm({props}:{props:any}) {
 
     const [login, setLogin] = useState<boolean>(true);
     const [username, setUsername] = useState<string>("");
@@ -99,8 +94,9 @@ export default function RegistrationForm({iId, props}: {iId: iId, props: any}) {
                 const payload = { username, password };
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
-                        iId.setId(res.data);
-                        props();
+                        localStorage.setItem("userId", res.data)
+                        // iId.setId(res.data);
+                        // props();
                         //window.location.href = 'http://localhost:3000/Advice';
                     })
                     .catch(() => {
@@ -111,8 +107,8 @@ export default function RegistrationForm({iId, props}: {iId: iId, props: any}) {
                     const payload = { username, email, password };
                     axios.post(`http://localhost:8080/api/register/post/accountInfo`, payload)
                         .then(res => {
-                            iId.setId(res.data);
-                            props();
+                            // iId.setId(res.data);
+                            // props();
                             window.location.href = 'http://localhost:3000/Advice';
                         })
                     setLogin(true);
