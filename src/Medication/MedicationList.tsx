@@ -50,7 +50,7 @@ function MedicationList() {
         let medlist = searchedMed.map((Medication, index) => 
             <div key={index}>
                 <li>{Medication.name}</li>
-                <button onClick={() => addClick(index)}>VoegToe</button>
+                <button onMouseUp={() => addClick(index)}>VoegToe</button>
             </div>
         );
         return medlist;
@@ -60,7 +60,7 @@ function MedicationList() {
         let medlist = addedMedList.map((Medication, index) => 
             <div key={index}>
                 <li>{Medication.name}</li>
-                <button onClick={() => removeClick(index)}>Verwijder</button>
+                <button onMouseUp={() => removeClick(index)}>Verwijder</button>
             </div>
         );
         return medlist;
@@ -74,7 +74,7 @@ function MedicationList() {
                 <input type="text" value={input} placeholder="Zoek medicatie" onChange={(e) => {setInput(e.target.value)}} />
             </div>
             <div>
-                <button onClick={searchClick}>Zoek</button>
+                <button onMouseUp={searchClick}>Zoek</button>
             </div>
             <div>
                 <h5>Gevonden medicatie:</h5>

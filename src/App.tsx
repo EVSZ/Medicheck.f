@@ -63,7 +63,7 @@ function App() {
   const [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
   function saveMedlist() {
-    if (patient.userPrescriptions.length == 0){ alert("Vul eerst uw medicatielijst") }
+    if (patient.userPrescriptions.length === 0){ alert("Vul eerst uw medicatielijst") }
     else{
       let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
         const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
@@ -80,7 +80,7 @@ function App() {
 
 function load() {
   const payload = { id };
-  axios.post('http://localhost:8080/api/patienten/patient', payload)
+  axios.post('http://localhost:8080/api/patienten/patient/'+ id)
   .then(res => {
     setPatient(res.data);
     console.log(res.data);

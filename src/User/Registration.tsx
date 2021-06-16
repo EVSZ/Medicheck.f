@@ -101,7 +101,7 @@ export default function RegistrationForm({iId, props}: {iId: iId, props: any}) {
                     .then(res => {
                         iId.setId(res.data);
                         props();
-                        window.location.href = 'http://localhost:3000/Advice';
+                        //window.location.href = 'http://localhost:3000/Advice';
                     })
                     .catch(() => {
                         alert("Uw inloggegevens waren incorrect");
