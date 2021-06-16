@@ -94,11 +94,11 @@ export default function RegistrationForm({props}:{props:any}) {
                 const payload = { username, password };
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
-                        localStorage.removeItem("userId")
                         localStorage.setItem("userId", res.data);
                         // iId.setId(res.data);
                         props();
                         //window.location.href = 'http://localhost:3000/Advice';
+                        <Link to= "/Advice"></Link>
                     })
                     .catch(() => {
                         alert("Uw inloggegevens waren incorrect");
