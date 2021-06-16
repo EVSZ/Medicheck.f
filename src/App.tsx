@@ -66,6 +66,7 @@ function App() {
     if (patient.userPrescriptions.length === 0){ alert("Vul eerst uw medicatielijst") }
     else{
       let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
+        const id = localStorage.getItem('userId');
         const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)

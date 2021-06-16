@@ -70,7 +70,6 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             e.preventDefault();
             axios.post(`http://localhost:8080/api/patienten/post`, { name, length, weight, gender, prego, age })
                 .then(res => {
-                    console.log(res);
                     console.log(res.data);
                 })
         }}>
@@ -149,7 +148,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             {showPregnant()}
             < div className="UserPFormGroup" >
                 <div className="element">
-                    <label className="formLabel">Leeftijd
+                    <label className="formLabel">Geboortedatum
                     <input type="date"
                             onChange={(e) => {
                                 age.setAge(e.target.value)
