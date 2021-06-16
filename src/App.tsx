@@ -79,8 +79,8 @@ function App() {
 }
 
 function load() {
-  const payload = { id };
-  axios.post('http://localhost:8080/api/patienten/patient/'+ id)
+  const payload = localStorage.getItem('id');
+  axios.post('http://localhost:8080/api/patienten/patient/'+ payload)
   .then(res => {
     setPatient(res.data);
     console.log(res.data);

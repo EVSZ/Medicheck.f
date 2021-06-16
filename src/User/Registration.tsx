@@ -94,9 +94,9 @@ export default function RegistrationForm({props}:{props:any}) {
                 const payload = { username, password };
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
-                        localStorage.setItem("userId", res.data)
+                        localStorage.setItem("userId", res.data);
                         // iId.setId(res.data);
-                        // props();
+                        props();
                         //window.location.href = 'http://localhost:3000/Advice';
                     })
                     .catch(() => {
@@ -107,8 +107,9 @@ export default function RegistrationForm({props}:{props:any}) {
                     const payload = { username, email, password };
                     axios.post(`http://localhost:8080/api/register/post/accountInfo`, payload)
                         .then(res => {
+                            localStorage.setItem("userId", res.data);
                             // iId.setId(res.data);
-                            // props();
+                            props();
                             window.location.href = 'http://localhost:3000/Advice';
                         })
                     setLogin(true);

@@ -22,9 +22,10 @@ export default function NavigationBar() {
                     <Link to="/Registration">
                     <button id="userLogin" className="btnImageOutline"><FontAwesomeIcon style={{width:"75px", height:"75px"}} icon={["fas", "user"]} /></button>
                 </Link> :
-                <button className="btnMedium btnOutline"
+                <button className="btnMedium btnOutline" 
                         onClick={() => {
                             localStorage.removeItem("userId")
+                            window.location.href = 'http://localhost:3000/Registration';
                         }} >Logout</button>
                     }
 
