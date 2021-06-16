@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import axios from 'axios'
 import './GetAdvice.css'
 
-export default function GetAdvice() {
+export default function GetAdvice(props: any) {
 
     function AdviceCall(){
         let userid = localStorage.getItem("userId")
         axios.post('http://localhost:8080/algorithm/getAdvice/' + userid)
         .then((res) => {
-            console.log(res.data);
-        })
-        .catch(() => {
-
+            props.Advice(res.data);
         })
     }
 

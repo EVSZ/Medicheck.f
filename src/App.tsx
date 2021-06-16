@@ -18,7 +18,7 @@ import DisplayMedication from './Medication/DisplayMedication'
 import axios from 'axios';
 library.add(fas);
 
-export interface patient{
+export interface patient {
   id: number;
   name: string;
   weight: number;
@@ -30,12 +30,12 @@ export interface patient{
   userPrescriptions: userPrescriptions[];
 }
 
-interface healthInformation{
+interface healthInformation {
   clcr: number;
   lastclcr: string;
 }
 
-interface userPrescriptions{
+interface userPrescriptions {
   medicine: medicine;
 }
 
@@ -46,9 +46,8 @@ interface medicine {
   medicineType: number;
   GetCurrentMedicationList: () => medicine[];
 }
-
 function App() {
-  const [patient, setPatient] = useState<patient>({id:0, name: '', weight: 0, length: 0, pregnant: false, birthDate: '0000-00-00', gender: 0, healthInformation: {clcr: 0, lastclcr: '0000-00-00'}, userPrescriptions: []});
+  const [patient, setPatient] = useState<patient>({ id: 0, name: '', weight: 0, length: 0, pregnant: false, birthDate: '0000-00-00', gender: 0, healthInformation: { clcr: 0, lastclcr: '0000-00-00' }, userPrescriptions: [] });
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -62,14 +61,71 @@ function App() {
   const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
   const [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
+  const [showAdvice, setShowAdvice] = useState<boolean>(false);
+  const [result, setResult] = useState<boolean | null>(null)
+  // function ChangeColor() {
+  //   for(let i=0; i<item.length; i++) {
+  //     item[i].
+  //   }
+  // }
+
+  function DisplayMessage(amidead: boolean|null) {
+    if (showAdvice) {
+      return (
+        <div>
+          {amidead ? <div className="infoElement">
+            <div className="infoBox">
+              <div className="infoTop">
+                <h3>het advies is <strong>positief</strong></h3>
+                <FontAwesomeIcon style={{ width: '30px', height: '30px', color: '#00d050', marginLeft: '10px' }} icon={["fas", "smile-beam"]} />
+              </div>
+              <div className="infoMid">
+                <h5>Uit de informatie die wij hebben ontvangen
+                  blijkt er op dit moment geen enkele reden is
+                  om een afspraak te maken met uw huisarts/dokter.
+                  Indien u klachten ervaart is het toch verstandig
+                  contact op te nemen.</h5>
+              </div>
+              <div className="infoBottom">
+                <button className="btnMedium btnNormal" onClick={() => {setShowAdvice(false); setResult(null)}}>OK</button>
+              </div>
+            </div>
+          </div> :
+            <div className="infoElement">
+              <div className="infoBox">
+                <div className="infoTop">
+                  <h3>het advies is <strong>negatief</strong></h3>
+                  <FontAwesomeIcon style={{ width: '30px', height: '30px', color: '#d00030', marginLeft: '10px' }} icon={["fas", "frown"]} />
+                </div>
+                <div className="infoMid">
+                  <h5>Na het genereren van het advies blijkt uit de
+                    resultaten dat het handig is om zo snel mogelijk
+                    een afspraak te maken met uw huisarts/dokter</h5>
+                </div>
+                <div className="infoBottom">
+                  <button className="btnMedium btnDanger" onClick={() => {setShowAdvice(false); setResult(null)}}>OK</button>
+                </div>
+              </div>
+
+            </div>}
+        </div>
+      )
+    }
+    else {
+      return (
+        <div></div>
+      )
+    }
+  }
+
   function saveMedlist() {
-    if (patient.userPrescriptions.length === 0){ alert("Vul eerst uw medicatielijst") }
-    else{
-      let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
-        const userId = localStorage.getItem('userId');
-        const payload = {userId, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
-        console.log(payload);
-        axios.put('http://localhost:8080/api/patienten/update', payload)
+    if (patient.userPrescriptions.length === 0) { alert("Vul eerst uw medicatielijst") }
+    else {
+      let healthInformation: healthInformation = { clcr: clcr, lastclcr: lastclcr }
+      const userid = localStorage.getItem('userId');
+      const payload = { userid, name, weight, length, pregnant, birthDate, gender, healthInformation, userPrescriptions };
+      console.log(payload);
+      axios.put('http://localhost:8080/api/patienten/update', payload)
         .then(res => {
           alert('Uw gegevens zijn opgeslagen!');
         })
@@ -77,55 +133,72 @@ function App() {
           alert('We konden op dit moment uw gegevens niet opslaan...');
         })
     }
-}
+  }
 
-function load() {
-  const payload = localStorage.getItem('id');
-  axios.post('http://localhost:8080/api/patienten/patient/'+ payload)
-  .then(res => {
-    setPatient(res.data);
-    console.log(res.data);
-    console.log(patient);
-  })
-}
+  function load() {
+    console.log("Hey, we made it here!");
+    const payload = localStorage.getItem('id');
+    axios.post('http://localhost:8080/api/patienten/patient/' + payload)
+      .then(res => {
+        setPatient(res.data);
+        console.log(res.data);
+        console.log(patient);
+      })
+  }
 
+  function SetAdvice(Advice: boolean){
+    setResult(Advice);
+    setShowAdvice(true);
+    DisplayMessage(result);
+  }
+  
   return (
-    
     <Router>
+      {result !== null ? 
+      <>
+      <div className="Center">
+        {DisplayMessage(result)}
+      </div> 
+      <div style={{width:'100%', height:'100%', top:0, left:0, position:'fixed', backgroundColor:'grey', opacity:'75%', zIndex:8}}>
+      </div>
+      </> : null}
       <div className="App">
-        <NavigationBar /> 
+        <NavigationBar />
         <Switch>
           <Route path="/Result">
             <Result />
           </Route>
           <Route path="/Registration">
-            <Registration 
-            props={load} />
+            <Registration
+              props={load} />
           </Route>
           <Route path="/Advice">
-              <div>
-                <GetAdvice />
-                <UserPForm
-                age={{age: birthDate, setAge:setBirthDate}} 
-                gender={{gender:gender, setGender:setGender}} 
-                length={{length:length, setLength:setLength}}
-                name={{name: name, setName:setName}}
-                prego={{prego:pregnant, setPrego:setPregnant}}
-                weight={{weight:weight, setWeight:setWeight}}/>
-                <HealthInfo 
-                healthinformation ={{clcr: clcr, setClcr: setClcr, lastclcr: lastclcr, setLastclcr: setLastclcr}}
-             />
+
+            <div>
+              <GetAdvice Advice={SetAdvice} />
+              <UserPForm
+                age={{ age: birthDate, setAge: setBirthDate }}
+                gender={{ gender: gender, setGender: setGender }}
+                length={{ length: length, setLength: setLength }}
+                name={{ name: name, setName: setName }}
+                prego={{ prego: pregnant, setPrego: setPregnant }}
+                weight={{ weight: weight, setWeight: setWeight }} />
+              <HealthInfo
+                healthinformation={{ clcr: clcr, setClcr: setClcr, lastclcr: lastclcr, setLastclcr: setLastclcr }}
+              />
+
+
+            </div>
+            <div className="right">
+              <DisplayMedication
+                iMeds={{ ups: userPrescriptions, setUps: setUp }} />
+              <div className="element">
+                <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
               </div>
-              <div className="right">
-                <DisplayMedication
-                iMeds={{ups: userPrescriptions, setUps: setUp}} />
-                <div className="element">
-                  <button className="btnSmall btnNormal" type="submit" onClick={saveMedlist}>Sla gegevens op</button>
-                </div>
-              </div>
-              {/* <MedicationList />
+            </div>
+            {/* <MedicationList />
             <AdviceGenerator /> */}
-             {/* properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} */}
+            {/* properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} */}
           </Route>
         </Switch>
       </div>
