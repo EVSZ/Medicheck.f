@@ -1,8 +1,0 @@
-.DisplayMedContainer{
-    position: relative;
-    margin-top: 175px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
