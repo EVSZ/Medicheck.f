@@ -11,6 +11,7 @@ export interface NavigationBarProps {
 }
 
 export default function NavigationBar() {
+    let logged: boolean = true;
     return (
         <nav className="mainContainer">
             <div className="content">
@@ -18,9 +19,9 @@ export default function NavigationBar() {
                     <img src={LOGO} alt="error" />
                 </div>
                 <div className="LoginButton">
-                    {localStorage.getItem("userId") === null ? 
+                    {localStorage.getItem("userId") === null && logged ? 
                     <Link to="/Registration">
-                    <button id="userLogin" className="btnImageOutline"><FontAwesomeIcon style={{width:"75px", height:"75px"}} icon={["fas", "user"]} /></button>
+                    <button onClick={() => {logged = false}} id="userLogin" className="btnImageOutline"><FontAwesomeIcon style={{width:"75px", height:"75px"}} icon={["fas", "user"]} /></button>
                 </Link> :
                 <button className="btnMedium btnOutline" 
                         onClick={() => {

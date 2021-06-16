@@ -140,8 +140,6 @@ function App() {
     axios.post('http://localhost:8080/api/patienten/patient/' + payload)
       .then(res => {
         setPatient(res.data);
-        console.log(res.data);
-        console.log(patient);
       })
   }
 

@@ -31,7 +31,7 @@ export default function DisplayMedication({iMeds}: {iMeds: iMeds}) {
             setMedlist(response.data);
         })
         .catch((error) => {
-            console.log(error);
+            
         })
     }
 

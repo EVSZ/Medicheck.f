@@ -16,7 +16,7 @@ function  AdviceGenerator()
             alert(response.data);
         })
         .catch((error) => {
-            console.log(error);
+            
         })
     }
 
