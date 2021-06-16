@@ -1,44 +1,19 @@
 /*Body & Typography*/
-.container {
-    position: relative;
-    display:flex;
-    flex-direction: column;
-}
 body {
-    background-color: #f7f7f7;
+    margin: 0;
+    font-family: 'Open Sans';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color:#F7F7F7;  
 }
-.element {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-.element button {
-    margin-left: 2px;
-}
-.elementL{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-.elementL label {
-    margin-top: 5px;
-    margin-left: 2px;
-}
-/*TEXT*/
 h1 {
     font-size: 48px;
-    font-weight:400;
 }
 h2 {
     font-size: 32px;
-    font-weight:400;
 }
 h3 {
     font-size: 24px;
-    font-weight:400;
 }
 h4 {
     font-size: 20px;
@@ -46,11 +21,9 @@ h4 {
 }
 h5{
     font-size: 18px;
-    font-weight:400;
 }
 h6 {
     font-size: 16px;
-    font-weight:400;
 }
 .bodyText{
     font-size: 15px;
@@ -60,7 +33,6 @@ h6 {
 .hyperLink {
     text-decoration: underline;
     font-weight: bold;
-    cursor: pointer;
 }
 ul {
     list-style: circle;
@@ -68,426 +40,23 @@ ul {
 li {
     list-style: georgian;
 }
+
 /*UI Components*/
-.btnSmall {
-    width: 140px;
-    height: 30px;
-    font-size: 13px;
-    font-weight: 600;
-    border-radius: 3px;
-}
-.btnMedium {
+.btnNormal {
     width: 140px;
     height: 35px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 3px;
+    font-weight: 15px;
+    font-weight: bold;
 }
 .btnLarge {
     width: 140px;
     height: 45px;
-    font-size: 17px;
-    font-weight: 600;
-    border-radius: 3px;
-}
-/*Normal*/
-.btnNormal {
-    color: #F7F7F7;
-    border-radius: 3px;
-    border: 0px;
-    background-color:#3d6c99;
-}
-.btnNormal:disabled {
-    opacity: 38%;
-}
-.btnNormal:hover {
-    background-color: #004a91;
-}
-.btnNormal:active {
-    background-color: #17324c;
-}
-/*Outline*/
-.btnOutline {
-    border: 1px solid #3d6c99;
-}
-.btnOutline:disabled {
-    opacity: 38%;
-}
-.btnOutline:hover {
-    background-color: #004a91;
-    color:#F7F7F7;
-}
-.btnOutline:active {
-    border: 1px solid #17324c;
-    background-color: #F7F7F7;
-    color:#313131
-}
-/*Danger*/
-.btnDanger {
-    border: 1px solid #C1272D;
-}
-.btnDanger:disabled {
-    opacity: 38%;
-}
-.btnDanger:hover {
-    background-color: #ad2528;
-    color: #F7F7F7;
-}
-.btnDanger:active {
-    background-color: #7f1c1c;
-    color:#F7F7F7;
-}
-/*Button Image*/
-.btnImageOutline {
-    border-radius: 3px;
-    width:50px;
-    padding: 9px;
-    border:1px solid #3d6c99;  
-}
-.btnImageOutline:hover {
-    background-color:#3d6c99;
-    color:#F7F7F7;
-}
-.btnImage {
-    border: 0px solid;
-    border-radius: 3px;
-    padding:5px;
-    color:#F7F7F7;
-    background-color: #3d6c99;
-}
-.btnImage:hover {
-    background-color: #004a91;
-}
-.btnImage:active {
-    background-color: #17324c;
-}
-/*UI ELEMENTS*/
-/*Checkboxes*/
-.checkBox {
-    position: relative;
-    padding-left: 35px;
-    cursor: default;
-}
-.checkBoxD {
-    position: relative;
-    padding-left: 35px;
-    cursor: default;
-    color: #d6d6d6;
-}
-.checkBoxD .customCheck {
-    background-color: #d6d6d6;
-    border: 1px solid #d6d6d6;
-}
-/* Hide the default checkbox */
-input[type=checkbox] {
-    visibility: hidden;
-}
-/* Creating a custom checkbox */
-.customCheck {
-    position: absolute;
-    top: 4px;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    border: 1px solid #313131;
-    border-radius: 1px;
-    background-color: #F7F7F7;
-} 
-/* Specify the background color to be
-shown when hovering over checkbox */
-.checkBox:hover input ~ .customCheck {
-    border-color: #004A91;
-}
-/* Specify the background color to be
-shown when checkbox is active */
-.checkBox input:active ~ .customCheck {
-    border-color: #004A91;
-}
-/* Specify the background color to be
-shown when checkbox is checked */
-.checkBox input:checked ~ .customCheck {
-    background-color: #004A91;
-}
-/* Checkmark to be shown in checkbox */
-/* It is not be shown when not checked */
-.customCheck:after {
-    content: "";
-    position: absolute;
-    display: none;
-} 
-/* Display checkmark when checked */
-.checkBox input:checked ~ .customCheck:after {
-    display: block;
-}
-/* Styling the checkmark using webkit */
-/* Rotated the rectangle by 45 degree and 
-showing only two border to make it look
-like a tickmark */
-.checkBox .customCheck:after {
-    left: 4px;
-    bottom: 3px;
-    width: 5px;
-    height: 9px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-/*Custom radio button*/
-.radioButton {
-    position: relative;
-    padding-left: 35px;
-    cursor: default;
-}
-.radioButtonD {
-    position: relative;
-    padding-left: 35px;
-    cursor: default;
-    color: #d6d6d6;
-}
-.radioButtonD .customRadio {
-    background-color: #d6d6d6;
-    border: 1px solid #d6d6d6;
-}
-input[type=radio] {
-    visibility: hidden;
-}
-.customRadio {
-    position: absolute;
-    top: 4px;
-    left: 2px;
-    height: 16px;
-    width: 16px;
-    border: 1px solid #313131;
-    border-radius: 20px;
-    background-color: #F7F7F7;
-}
-input[type=radio][disabled] {
-    top: 4px;
-    left: 0;
-    height: 15px;
-    width: 15px;
-    border: 1px solid #313131;
-    border-radius: 100px;
-    background-color: #313131;
-}
-.radioButton:hover input ~ .customRadio {
-    border-color: #004A91;
-}
-.radioButton input:active ~ .customRadio {
-    border-color: #004A91;
-}
-.radioButton input:checked ~ .customRadio {
-    background-color: #F7F7F7;
-}
-.customRadio:after {
-    content: "";
-    position: absolute;
-    display: none;
-} 
-/* Display checkmark when checked */
-.radioButton input:checked ~ .customRadio:after {
-    display: block;
-}
-/* Styling the checkmark using webkit */
-/* Rotated the rectangle by 45 degree and 
-showing only two border to make it look
-like a tickmark */
-.radioButton .customRadio:after {
-    left: 3px;
-    bottom: 3.5px;
-    width: 8px;
-    height: 8px;
-    border-radius: 25px;
-    background-color: #3d6c99;
-}
-/*FORM elements*/
-.formLabel {
-    font-size:18px;
-    position: relative;
-    display:flex;
-    flex-direction:column;
-}
-.formLabelError {
-    color: red;
-    font-size: 15px;
-}
-/* .formLabel input[type=text]:focus:active, .formLabel input[type=text]:active {
-    border-color: orange;
-} */
-.formLabel input[type=text], .formLabel input[type=number], .formLabel input[type=date], .formLabel input[type=password]{
-    left:10px;
-    font-size:16px;
-    font-weight: 600;
-    height: 35px;
-    min-width: 325px;
-    border: 0.75px solid #d6d6d6;
-    border-radius: 3   px;
-    text-indent: 15px;
-}
-.formLabel input[type=text].success {
-    border: 1px solid green;
-}
-.formLabel input[type=text].fail {
-    border: 1px solid red;
-}
-.customTextBox {
-    color: orange;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.customTextBox input[type=text] {
-    text-indent:45px;
-}
-.textBoxIcon {
-    position: absolute;
-    left:10px;
-    color:black;
-    width:50px;
-    height:50px;
-}
-.textArea textarea {
-    height:100px;
-    min-width:325px;
-    font-size:16px;
-    font-weight: 600;
-    text-indent: 15px;
-    resize:none;
-    border: 0.75px solid #d6d6d6;
-}
-/*LABELS*/
-.customLabel {
-    position:relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width:75px;
-    height:25px;
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 12px;
-    color:#F7F7F7;
-}
-.customLabel#plain {
-    color:black;
-    background-color: rgb(216, 216, 216);
-}
-.customLabel#primary {
-    background-color: #1ab394;
-}
-.customLabel#info {
-    background-color: #4eb7be;
-}
-.customLabel#warning {
-    background-color: #f8ac59;
-}
-.customLabel#danger {
-    background-color: #C1272D;
-}
-.customLabel#success {
-    background-color: #7599a7;
-}
-.customLabel#tooltip {
-    background-color: #414042;
-}
-/*TABLE*/
-.Table {
-    border:1px solid #313131;
-    margin-bottom: 25px;
-}
-.Table td { 
-    border-top: 1px solid #313131;
-    padding: 8px;
-    min-height:45px;
-}
-.Table tr:nth-child(even) {
-    background-color: #f5f5f6;
-}
-.Table tr:hover {
-    background-color:#e3ecf4;
-}
-.Table tr:active {
-    background: color #b7cee3;;
-}
-.Table th {
-    padding: 10px;
-    font-size: 18px;
-    font-weight:400;
-    align-items: center;
-    background-color: #F7F7F7;
-}
-.Table .scary {
-    border: 2px solid red;
-    color:#C1272D;
-}
-.Table tr td .tblLabelContainer {
-    display: flex;
-    flex-direction: row;
-    margin-left: -5px;
-}
-.Table tr td .customLabel#danger {
-    min-width: 25px;
-    max-width: 40px;
-    margin-left: 5px;
-}
-.tableDangerIcon {
-    margin-left: 5px;
-    margin-right:5px;
-}
-/*INFOBOX*/
-.infoElement {
-    position:absolute;
-    border:2px solid #313131;
-    border-radius: 10px;
-    margin: 20px 0 20px 0;
-    background-color: #F7F7F7;
-    z-index: 12;
-
-}
-.infoBox {
-    position:relative;
-    margin:5px;
-    width: 600px;
-    height: 175px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: top;
-}
-.infoBox h3, .infoBox h5{
-    padding-left: 10px;
-}
-.infoTop {
-    position: relative;
-    border-bottom:1px solid #313131;
-    margin-left:-5px;
-    width:102%;
-    display: flex;
-    flex-direction: row;
-}
-.infoTop div {
-    display: flex;
-    flex-direction: row;
-}
-.infoMid {
-    position: relative;
-    margin:10px 0 10px 0;
-    border-bottom:1px solid #313131;
-    margin-left:-5px;
-    width:102%;
-}
-.infoBottom {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center
-}
-
-.Center {
-    position:absolute;
-    top:25%;
-    left:35%;
-    z-index: 10;
+    font-weight: 17px;
+    font-weight: bold; 
+}
+.btnSmall {
+    width: 140px;
+    height: 30px;
+    font-weight: 13px;
+    font-weight: bold;  
 }

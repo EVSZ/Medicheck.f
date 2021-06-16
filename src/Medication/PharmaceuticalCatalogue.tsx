@@ -8,9 +8,9 @@ interface PharmaceuticalCatalogueProps {
 
 export default function PC({ properties }: { properties: PharmaceuticalCatalogueProps }) {
 
-    let medication = ["med1", "med2", "med3", "med4"];
+    const medication = ["med1", "med2", "med3", "med4"];
 
-    let [searchedMeds, setSearchedMeds] = useState<string[]>([]);
+    const [searchedMeds, setSearchedMeds] = useState<string[]>([]);
 
     function returnMedList(searchedMeds: string[]) {
         let medlist = searchedMeds.map((string, index) => 
@@ -21,15 +21,15 @@ export default function PC({ properties }: { properties: PharmaceuticalCatalogue
         );
         return medlist;
     }
-    let addedMedication = [""];
-    let addedMedList = addedMedication.map((string, index) =>
+    const addedMedication = [""];
+    const addedMedList = addedMedication.map((string, index) =>
     <div key={index}>
         <li>{string}</li>
         <button>Verwijder</button>
     </div>
     );
 
-    let [input, setInput] = useState<string>("");
+    const [input, setInput] = useState<string>("");
 
     function checkForMed() {
         let temparray = [];
@@ -42,7 +42,7 @@ export default function PC({ properties }: { properties: PharmaceuticalCatalogue
         setSearchedMeds(temparray);
     }
 
-    let [med, setMed] = useState(searchedMeds[0]);
+    const [med, setMed] = useState(searchedMeds[0]);
 
     function addMed() {
         if (med !== null){
