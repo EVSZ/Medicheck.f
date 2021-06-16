@@ -48,7 +48,7 @@ interface medicine {
 }
 
 function App() {
-  const [patient, setPatient] = useState<patient>({id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '2020-12-10', gender: 0, healthInformation: {clcr: 69, lastclcr: '2020-05-10'}, userPrescriptions: []});
+  const [patient, setPatient] = useState<patient>({id:0, name: '', weight: 0, length: 0, pregnant: false, birthDate: '0000-00-00', gender: 0, healthInformation: {clcr: 0, lastclcr: '0000-00-00'}, userPrescriptions: []});
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -66,6 +66,7 @@ function App() {
     if (patient.userPrescriptions.length === 0){ alert("Vul eerst uw medicatielijst") }
     else{
       let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
+        const id = localStorage.getItem('userId');
         const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)

@@ -97,7 +97,7 @@ export default function RegistrationForm({props}:{props:any}) {
                         localStorage.setItem("userId", res.data);
                         // iId.setId(res.data);
                         props();
-                        //window.location.href = 'http://localhost:3000/Advice';
+                        window.location.href = 'http://localhost:3000/Advice';
                     })
                     .catch(() => {
                         alert("Uw inloggegevens waren incorrect");
