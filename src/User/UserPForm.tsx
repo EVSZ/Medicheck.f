@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react'
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import './UserPForm.css'
@@ -35,8 +36,10 @@ interface iPrego {
     setPrego: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function UserPForm({name, length, weight, age, gender, prego}:{name:iName, length:iLength, weight:iWeight, age:iAge, gender:iGender, prego: iPrego}) {
+function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, length: iLength, weight: iWeight, age: iAge, gender: iGender, prego: iPrego }) {
 
+    const [maleR, setMaleR] = useState<boolean>(false)
+    const [femaleR, setFemaleR] = useState<boolean>(false)
     // const [patient] = useState<IPatient>();
 
     function showPregnant(): JSX.Element {
@@ -116,11 +119,13 @@ function UserPForm({name, length, weight, age, gender, prego}:{name:iName, lengt
                 <div className="element">
                     <label className="radioButton">Man
                 <input type="radio"
-                            onChange={() => {
-                                gender.setGender(0)
-                                prego.setPrego(false)
-                            }
-                            } />
+                            onClick={() => {
+                            setMaleR(!maleR)
+                            setFemaleR(false)
+                            gender.setGender(0)
+                            prego.setPrego(false)
+                        }}
+                            checked={maleR} />
                         <span className="customRadio"></span>
                     </label>
                 </div>
@@ -128,11 +133,15 @@ function UserPForm({name, length, weight, age, gender, prego}:{name:iName, lengt
                     <label className="radioButton">Vrouw
                 <input type="radio"
                             name="formHorizontalRadios"
-                            onChange={() => {
+                            onClick={() => {
+                                setFemaleR(!femaleR)
+                                setMaleR(false)
                                 gender.setGender(1)
                                 prego.setPrego(false)
                             }
-                            } checked={true} />
+                            }
+                            checked={femaleR}
+                        />
                         <span className="customRadio"></span>
                     </label>
                 </div>

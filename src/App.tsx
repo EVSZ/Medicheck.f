@@ -89,6 +89,7 @@ function load() {
 }
 
   return (
+    
     <Router>
       <div className="App">
         <NavigationBar /> 
