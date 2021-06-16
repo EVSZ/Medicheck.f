@@ -102,6 +102,7 @@ export default function RegistrationForm({props}:{props:any}) {
                     .catch(() => {
                         alert("Uw inloggegevens waren incorrect");
                     })
+                    
             } else {
                 if (password === password2) {
                     const payload = { username, email, password };

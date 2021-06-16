@@ -69,28 +69,11 @@ function App() {
   //   }
   // }
 
-  function DisplayMessage(amidead: boolean|null) {
+  function DisplayMessage(amidead: boolean | null) {
     if (showAdvice) {
       return (
         <div>
-          {amidead ? <div className="infoElement">
-            <div className="infoBox">
-              <div className="infoTop">
-                <h3>het advies is <strong>positief</strong></h3>
-                <FontAwesomeIcon style={{ width: '30px', height: '30px', color: '#00d050', marginLeft: '10px' }} icon={["fas", "smile-beam"]} />
-              </div>
-              <div className="infoMid">
-                <h5>Uit de informatie die wij hebben ontvangen
-                  blijkt er op dit moment geen enkele reden is
-                  om een afspraak te maken met uw huisarts/dokter.
-                  Indien u klachten ervaart is het toch verstandig
-                  contact op te nemen.</h5>
-              </div>
-              <div className="infoBottom">
-                <button className="btnMedium btnNormal" onClick={() => {setShowAdvice(false); setResult(null)}}>OK</button>
-              </div>
-            </div>
-          </div> :
+          {amidead ?
             <div className="infoElement">
               <div className="infoBox">
                 <div className="infoTop">
@@ -100,13 +83,30 @@ function App() {
                 <div className="infoMid">
                   <h5>Na het genereren van het advies blijkt uit de
                     resultaten dat het handig is om zo snel mogelijk
-                    een afspraak te maken met uw huisarts/dokter</h5>
+                    een afspraak te maken met uw huisarts/dokter.</h5>
                 </div>
                 <div className="infoBottom">
-                  <button className="btnMedium btnDanger" onClick={() => {setShowAdvice(false); setResult(null)}}>OK</button>
+                  <button className="btnMedium btnDanger" onClick={() => { setShowAdvice(false); setResult(null) }}>OK</button>
                 </div>
               </div>
-
+            </div> :
+            <div className="infoElement">
+              <div className="infoBox">
+                <div className="infoTop">
+                  <h3>het advies is <strong>positief</strong></h3>
+                  <FontAwesomeIcon style={{ width: '30px', height: '30px', color: '#00d050', marginLeft: '10px' }} icon={["fas", "smile-beam"]} />
+                </div>
+                <div className="infoMid">
+                  <h5>Uit de informatie die wij hebben ontvangen
+                    blijkt er op dit moment geen enkele reden is
+                    om een afspraak te maken met uw huisarts/dokter.
+                    Indien u klachten ervaart is het toch verstandig
+                    contact op te nemen.</h5>
+                </div>
+                <div className="infoBottom">
+                  <button className="btnMedium btnNormal" onClick={() => { setShowAdvice(false); setResult(null) }}>OK</button>
+                </div>
+              </div>
             </div>}
         </div>
       )
@@ -136,7 +136,6 @@ function App() {
   }
 
   function load() {
-    console.log("Hey, we made it here!");
     const payload = localStorage.getItem('id');
     axios.post('http://localhost:8080/api/patienten/patient/' + payload)
       .then(res => {
@@ -146,22 +145,22 @@ function App() {
       })
   }
 
-  function SetAdvice(Advice: boolean){
+  function SetAdvice(Advice: boolean) {
     setResult(Advice);
     setShowAdvice(true);
     DisplayMessage(result);
   }
-  
+
   return (
     <Router>
-      {result !== null ? 
-      <>
-      <div className="Center">
-        {DisplayMessage(result)}
-      </div> 
-      <div style={{width:'100%', height:'100%', top:0, left:0, position:'fixed', backgroundColor:'grey', opacity:'75%', zIndex:8}}>
-      </div>
-      </> : null}
+      {result !== null ?
+        <>
+          <div className="Center">
+            {DisplayMessage(result)}
+          </div>
+          <div style={{ width: '100%', height: '100%', top: 0, left: 0, position: 'fixed', backgroundColor: 'grey', opacity: '75%', zIndex: 8 }}>
+          </div>
+        </> : null}
       <div className="App">
         <NavigationBar />
         <Switch>

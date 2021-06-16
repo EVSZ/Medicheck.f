@@ -9,6 +9,7 @@ export default function GetAdvice(props: any) {
         axios.post('http://localhost:8080/algorithm/getAdvice/' + userid)
         .then((res) => {
             props.Advice(res.data);
+            console.log(res.data)
         })
     }
 

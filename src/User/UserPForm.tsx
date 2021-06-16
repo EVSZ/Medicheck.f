@@ -39,7 +39,7 @@ interface iPrego {
 function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, length: iLength, weight: iWeight, age: iAge, gender: iGender, prego: iPrego }) {
 
     const [maleR, setMaleR] = useState<boolean>(false)
-    const [femaleR, setFemaleR] = useState<boolean>(false)    
+    const [femaleR, setFemaleR] = useState<boolean>(false)
     // const [patient] = useState<IPatient>();
 
     function showPregnant(): JSX.Element {
@@ -50,12 +50,13 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             checkbox = (<div className="UserPFormGroup">
                 <Form.Group>
                     <div className="UserPFormGrouplabel">
-                        <Form.Label> Zwanger? </Form.Label>
-                    </div>
-                    <div className="UserPFormGroupInput">
-                        <input onSelect={() => {
+                        <label className="checkBox" onSelect={() => {
                             prego.setPrego(true)
-                        }} type="checkbox" />
+                        }}>
+                            <input type="checkbox" />
+                            <span className="customCheck"></span>
+                        </label>
+                        <Form.Label> Bent u zwanger? </Form.Label>
                     </div>
                 </Form.Group>
             </ div>);
@@ -77,7 +78,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             <div className="UserPFormGroup">
                 <div className="element">
                     <label className="formLabel">Naam
-                    <input type="text"
+                        <input type="text"
                             value={name.name}
                             onChange={(e) => {
                                 name.setName(e.target.value)
@@ -89,7 +90,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             <div className="UserPFormGroup">
                 <div className="element">
                     <label className="formLabel">Lengte
-                    <input type="number"
+                        <input type="number"
                             min="1"
                             step="1"
                             value={length.length}
@@ -103,7 +104,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             <div className="UserPFormGroup">
                 <div className="element">
                     <label className="formLabel">Gewicht
-                    <input type="number"
+                        <input type="number"
                             min="1"
                             step="1"
                             value={weight.weight}
@@ -117,10 +118,10 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             <div className="UserPFormGroup">
                 <div className="element">
                     <label className="radioButton">Man
-                <input type="radio"
+                        <input type="radio"
                             onClick={() => {
                                 setMaleR(!maleR)
-                                setFemaleR(false)                              
+                                setFemaleR(false)
                                 gender.setGender(0)
                                 prego.setPrego(false)
                             }}
@@ -130,7 +131,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
                 </div>
                 <div>
                     <label className="radioButton">Vrouw
-                <input type="radio"
+                        <input type="radio"
                             name="formHorizontalRadios"
                             onClick={() => {
                                 setFemaleR(!femaleR)
@@ -138,9 +139,9 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
                                 gender.setGender(1)
                                 prego.setPrego(false)
                             }
-                        }
+                            }
                             checked={femaleR}
-                            />
+                        />
                         <span className="customRadio"></span>
                     </label>
                 </div>
@@ -149,7 +150,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
             < div className="UserPFormGroup" >
                 <div className="element">
                     <label className="formLabel">Geboortedatum
-                    <input type="date"
+                        <input type="date"
                             onChange={(e) => {
                                 age.setAge(e.target.value)
                             }}
