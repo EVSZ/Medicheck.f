@@ -1,21 +1,36 @@
 import react from 'react';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../NavBar/Navbar.css';
+import LOGO from './Logo.png'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export interface NavigationBarProps {
 
 }
- 
+
 export default function NavigationBar() {
-    return ( 
-        <nav>
-            <ul>
-                <Link to="/"><a href="#Home">Home</a></Link>
-                <Link to="/Advice"><a href="#Advice">Advice</a></Link>
-                <Link to="/Personal"><a href="#User">Personal</a></Link>
-            </ul>
-                <Link to="/Registration"><Button variant="danger">Login</Button></Link>
+    return (
+        <nav className="mainContainer">
+            <div className="content">
+                <div className="Logo">
+                    <img src={LOGO} alt="error" />
+                </div>
+                <div className="LoginButton">
+                    {localStorage.getItem("userId") === null ? 
+                    <Link to="/Registration">
+                    <button id="userLogin" className="btnImageOutline"><FontAwesomeIcon style={{width:"75px", height:"75px"}} icon={["fas", "user"]} /></button>
+                </Link> :
+                <button className="btnMedium btnOutline" 
+                        onClick={() => {
+                            localStorage.removeItem("userId")
+                            window.location.href = 'http://localhost:3000/Registration';
+                        }} >Logout</button>
+                    }
+
+                </div>
+            </div>
         </nav>
-     );
+    );
 }
