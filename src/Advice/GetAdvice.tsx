@@ -5,7 +5,8 @@ import './GetAdvice.css'
 export default function GetAdvice() {
 
     function AdviceCall(){
-        axios.get('http://localhost:8080/algorithm/getAdvice')
+        let userid = localStorage.getItem("userId")
+        axios.post('http://localhost:8080/algorithm/getAdvice/' + userid)
         .then((res) => {
             console.log(res.data);
         })

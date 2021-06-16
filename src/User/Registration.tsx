@@ -7,11 +7,11 @@ import {Link} from 'react-router-dom';
 
 export default function RegistrationForm({props}:{props:any}) {
 
-    const [login, setLogin] = useState<boolean>(true);
-    const [username, setUsername] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [password2, setPassword2] = useState<string>("");
+    let [login, setLogin] = useState<boolean>(true);
+    let [username, setUsername] = useState<string>("");
+    let [email, setEmail] = useState<string>("");
+    let [password, setPassword] = useState<string>("");
+    let [password2, setPassword2] = useState<string>("");
 
     function DisplayForm() {
         return (
@@ -94,6 +94,7 @@ export default function RegistrationForm({props}:{props:any}) {
                 const payload = { username, password };
                 axios.post(`http://localhost:8080/api/Login/post/loginInfo`, payload)
                     .then(res => {
+                        localStorage.removeItem("userId")
                         localStorage.setItem("userId", res.data);
                         // iId.setId(res.data);
                         props();

@@ -48,25 +48,26 @@ interface medicine {
 }
 
 function App() {
-  const [patient, setPatient] = useState<patient>({id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '2020-12-10', gender: 0, healthInformation: {clcr: 69, lastclcr: '2020-05-10'}, userPrescriptions: []});
+  let [patient, setPatient] = useState<patient>({id:41, name: 'Matteus', weight: 69, length: 169, pregnant: true, birthDate: '2020-12-10', gender: 0, healthInformation: {clcr: 69, lastclcr: '2020-05-10'}, userPrescriptions: []});
 
-  const [id, setId] = useState<number>(patient.id);
-  const [name, setName] = useState<string>(patient.name);
-  const [weight, setWeight] = useState<number>(patient.weight);
-  const [length, setLength] = useState<number>(patient.length);
-  const [pregnant, setPregnant] = useState<boolean>(patient.pregnant);
-  const [birthDate, setBirthDate] = useState<string>(patient.birthDate);
-  const [gender, setGender] = useState<number>(patient.gender)
+  let [id, setId] = useState<number>(patient.id);
+  let [name, setName] = useState<string>(patient.name);
+  let [weight, setWeight] = useState<number>(patient.weight);
+  let [length, setLength] = useState<number>(patient.length);
+  let [pregnant, setPregnant] = useState<boolean>(patient.pregnant);
+  let [birthDate, setBirthDate] = useState<string>(patient.birthDate);
+  let [gender, setGender] = useState<number>(patient.gender)
 
-  const [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
-  const [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
-  const [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
+  let [clcr, setClcr] = useState<number>(patient.healthInformation.clcr);
+  let [lastclcr, setLastclcr] = useState<string>(patient.healthInformation.lastclcr);
+  let [userPrescriptions, setUp] = useState<userPrescriptions[]>(patient.userPrescriptions);
 
   function saveMedlist() {
     if (patient.userPrescriptions.length === 0){ alert("Vul eerst uw medicatielijst") }
     else{
       let healthInformation:healthInformation = {clcr:clcr, lastclcr:lastclcr}
-        const payload = {id, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
+      let userid = localStorage.getItem("userId")
+        const payload = {userid, name, weight, length, pregnant, birthDate,gender,healthInformation,userPrescriptions};
         console.log(payload);
         axios.put('http://localhost:8080/api/patienten/update', payload)
         .then(res => {
@@ -79,12 +80,11 @@ function App() {
 }
 
 function load() {
-  const payload = localStorage.getItem('id');
+  const payload = localStorage.getItem('userId');
   axios.post('http://localhost:8080/api/patienten/patient/'+ payload)
   .then(res => {
     setPatient(res.data);
     console.log(res.data);
-    console.log(patient);
   })
 }
 
