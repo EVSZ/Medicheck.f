@@ -1,0 +1,25 @@
+.mainContainer {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    min-height: 150px;
+    background-color: white;
+}
+.Logo {
+    position: absolute;
+    left: 75px;
+    top:-80px;
+}
+.Logo img {
+    max-width: 300px;
+}
+.LoginButton {
+    position: absolute;
+    right: 75px;
+    top:10px;
+}
+.LoginButton #userLogin {
+    width:125px;
+    height:125px;
+}
