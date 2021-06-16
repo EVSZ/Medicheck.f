@@ -12,12 +12,12 @@ export interface Medication {
 
 function MedicationList() {
 
-    const [input, setInput] = useState<string>("");
-    const [MedList, setMedlist] = useState<Medication[]>([]);
-    const [searchedMed] = useState<Medication[]>([]);
-    const [addedMedList] = useState<Medication[]>([]);
+    let [input, setInput] = useState<string>("");
+    let [MedList, setMedlist] = useState<Medication[]>([]);
+    let [searchedMed] = useState<Medication[]>([]);
+    let [addedMedList] = useState<Medication[]>([]);
 
-    const GetMedlist = async () => {
+    let GetMedlist = async () => {
         axios.get('http://localhost:8080/api/medication/getAll')
         .then((response) => {
             setMedlist(response.data);
@@ -27,7 +27,7 @@ function MedicationList() {
         })
     }
 
-    const searchClick=() => {
+    let searchClick=() => {
         GetMedlist();
         searchedMed.splice(0, searchedMed.length);
 
@@ -38,11 +38,11 @@ function MedicationList() {
         });
     }
 
-    const addClick=(index: number) => {
+    let addClick=(index: number) => {
         addedMedList.push(searchedMed[index])
     }
 
-    const removeClick=(index:number) => {
+    let removeClick=(index:number) => {
         addedMedList.splice(index, 1);
     }
 

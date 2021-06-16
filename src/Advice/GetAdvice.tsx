@@ -5,13 +5,13 @@ import './GetAdvice.css'
 export default function GetAdvice() {
 
     function AdviceCall(){
-        axios.post(`http://localhost:8080/algorithm/getAdvice/` + localStorage.getItem('userId'))
-
-        .then((response) => {
-            alert(response.data);
+        let userid = localStorage.getItem("userId")
+        axios.post('http://localhost:8080/algorithm/getAdvice/' + userid)
+        .then((res) => {
+            console.log(res.data);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+
         })
     }
 
