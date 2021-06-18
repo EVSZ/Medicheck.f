@@ -93,6 +93,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
                         <input type="number"
                             min="1"
                             step="1"
+                            max="251"
                             value={length.length}
                             onChange={(e) => {
                                 length.setLength(parseInt(e.target.value))
@@ -107,6 +108,7 @@ function UserPForm({ name, length, weight, age, gender, prego }: { name: iName, 
                         <input type="number"
                             min="1"
                             step="1"
+                            max="500"
                             value={weight.weight}
                             onChange={(e) => {
                                 weight.setWeight(parseInt(e.target.value))

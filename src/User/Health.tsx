@@ -19,7 +19,7 @@ export default function HealthInfo({healthinformation}: {healthinformation: heal
                 </div>
                 <div className="element">
                     <label className="formLabel">ClCr Waarde
-                    <input type="number" min="0" onChange={(e) => {healthinformation.setClcr(parseInt(e.target.value))}} />
+                    <input type="number" min="0" max="5000" step="1" onChange={(e) => {healthinformation.setClcr(parseInt(e.target.value))}} />
                     </label>
                 </div>
                 <div className="element">

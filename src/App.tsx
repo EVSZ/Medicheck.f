@@ -47,7 +47,7 @@ interface medicine {
   GetCurrentMedicationList: () => medicine[];
 }
 function App() {
-  const [patient, setPatient] = useState<patient>({ id: 0, name: '', weight: 0, length: 0, pregnant: false, birthDate: '0000-00-00', gender: 0, healthInformation: { clcr: 0, lastclcr: '0000-00-00' }, userPrescriptions: [] });
+  const [patient, setPatient] = useState<patient>({ id: 0, name: '', weight: 0, length: 0, pregnant: false, birthDate: '2017-10-08', gender: 0, healthInformation: { clcr: 0, lastclcr: '2017-10-08' }, userPrescriptions: [] });
 
   const [id, setId] = useState<number>(patient.id);
   const [name, setName] = useState<string>(patient.name);
@@ -82,7 +82,7 @@ function App() {
                 </div>
                 <div className="infoMid">
                   <h5>Na het genereren van het advies blijkt uit de
-                    resultaten dat het handig is om zo snel mogelijk
+                  resultaten dat het handig is om zo snel mogelijk
                     een afspraak te maken met uw huisarts/dokter.</h5>
                 </div>
                 <div className="infoBottom">
@@ -98,9 +98,9 @@ function App() {
                 </div>
                 <div className="infoMid">
                   <h5>Uit de informatie die wij hebben ontvangen
-                    blijkt er op dit moment geen enkele reden is
-                    om een afspraak te maken met uw huisarts/dokter.
-                    Indien u klachten ervaart is het toch verstandig
+                  blijkt er op dit moment geen enkele reden is
+                  om een afspraak te maken met uw huisarts/dokter.
+                  Indien u klachten ervaart is het toch verstandig
                     contact op te nemen.</h5>
                 </div>
                 <div className="infoBottom">
@@ -137,7 +137,7 @@ function App() {
 
   function load() {
     const payload = localStorage.getItem('id');
-    axios.post('http://localhost:8080/api/patienten/patient/' + payload)
+    axios.get('http://localhost:8080/api/patienten/patient/' + payload)
       .then(res => {
         setPatient(res.data);
       })
@@ -196,6 +196,9 @@ function App() {
             {/* <MedicationList />
             <AdviceGenerator /> */}
             {/* properties={{ preg: false, gender: "", height: 155, name: "Matt", weight: 75, MedList: null }} */}
+          </Route>
+          <Route path="/">
+              <h1 style={{ marginTop: "200px" }}>Welkom bij de MediCheck APK </h1>  
           </Route>
         </Switch>
       </div>

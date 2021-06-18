@@ -108,10 +108,9 @@ export default function RegistrationForm({props}:{props:any}) {
                     const payload = { username, email, password };
                     axios.post(`http://localhost:8080/api/register/post/accountInfo`, payload)
                         .then(res => {
-                            localStorage.setItem("userId", res.data);
                             // iId.setId(res.data);
                             props();
-                            window.location.href = 'http://localhost:3000/Advice';
+                            window.location.href = 'http://localhost:3000/Registration';
                         })
                     setLogin(true);
                 } else {
